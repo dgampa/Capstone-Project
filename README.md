@@ -90,7 +90,6 @@ Top Tool Bar
    * [Customer Story Add]
 
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
 <img src='./DhritiWireframes.jpg' width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
