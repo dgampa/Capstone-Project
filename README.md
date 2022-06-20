@@ -33,19 +33,23 @@ Provides users with the opportunity to form a personal bond with small businesse
 
 **Required Must-have Stories**
 
-* [fill in your required user stories here]
+
 * uploading videos to the business home page
 * compiling one second videos at the end the end of the month to create a video
 * map with the closest businesses to you for users
 * capture image for users at the store
+* About the business with social media, rating, and hours of operation
+* Submit a rating for the business
 
 **Optional Nice-to-have Stories**
 
-* [fill in your required user stories here]
-* About the business with contact information, social media, rating, and hours of operation
+* Clicking on profile pic includes hearted images
+* Clicking on video opens full screen
+* Favorite A Business, so it shows up on Individuals Profile Page
+* Smoother transitions for creating business vide0
+* Allowing businesses to edit the auto created combined video
 * Push notifications when it is time to upload
 * Search bar to search for a certain category (ex. food, clothing, etc)
-* Submit a rating for the business
 
 ### 2. Screen Archetypes
 
@@ -93,6 +97,8 @@ Top Tool Bar
 <img src='./DhritiWireframes.jpg' width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
+
+https://www.figma.com/file/MCLMLxCI0CXiMtyAhqidaq/BB-App-Wireframing?node-id=3%3A9
 
 ### [BONUS] Interactive Prototype
 
