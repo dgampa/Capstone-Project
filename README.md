@@ -33,43 +33,48 @@ Provides users with the opportunity to form a personal bond with small businesse
 
 **Required Must-have Stories**
 
-
-* uploading videos to the business home page
-* compiling one second videos at the end the end of the month to create a video
+* login to your account or create either a business or individual account
+* inclue a home feed that includes businesses near you from an api and is geared towards your interests
+* business details page with a compilation video of their two seconds a day if they use the app, with social media, rating, hours of operation, location, and individual stories
+* individual users can post a pictyre and submit a rating for a business that they went to
+* uploading videos every day to create a compilation video
 * map with the closest businesses to you for users
-* capture image for users at the store
-* About the business with social media, rating, and hours of operation
-* Submit a rating for the business
+* profile page with business details that can be edited
+* profile page with individual's interests that can be edited
 
 **Optional Nice-to-have Stories**
 
-* Clicking on profile pic includes hearted images
+* Clicking on profile picture includes hearted images
 * Clicking on video opens full screen
+* Links to the businesses social media and link to the businesses website
+* Place an order link
 * Favorite A Business, so it shows up on Individuals Profile Page
-* Smoother transitions for creating business vide0
+* Smoother transitions for creating business videos
 * Allowing businesses to edit the auto created combined video
+* Allowing individuals to post video reviews as well as pictures
 * Push notifications when it is time to upload
 * Search bar to search for a certain category (ex. food, clothing, etc)
+* making individual's picture double sided so that one side is a selfie of yourself and the other is of the business
+* follow your friends to see where they have recently been
+
 
 ### 2. Screen Archetypes
 
 * [Login Page]
-   * [Create an account]
-   * Customer - asks for interests and location
-   * Business - asks for business details and details about what time they prefer to be reminded to upload
+    * allow users to signup as an idividual or business user
 * [Business Feed]
+    * allow users to look through businesses that match their interests
    * [Business Details Activity]
-   * plays the compilation video and images are available to look through 
-   * [Search Bar]
-   * filter your feed
-* [Map Page]
-    * [Businesses near you]
-    * if they use the app then their pointer is a different color and clickable]
-* [Video Creation (only businesses)]
-    * take your one second video
-    * create video compilation
-* [Customer Stories (users only)]
-    * take a picture of yourself at the store and what you bought or another worker or favorite part of the store
+       * allow users to look through the business details such as rating hours of operation, location, and social media accounts. Also play a video of the business and allow users to look through other individuals posts about the business
+   * [Compose Individual Story (only individual users)] 
+       * allow individual users to rate the business and post a picture at the business
+* [Video Creation (only businesses users)]
+    * allow business users to record and choose a two second video clip of the products they sell or the store that gets added to their business video
+* [Profile]
+    * displays the current users information and allows for users to edit their information
+* [Search Page]
+    * [Map]
+    * allow users to look for businesses near them
 
 
 ### 3. Navigation
@@ -80,7 +85,6 @@ Bottom Navigation
 * [Profile]
 * [Business Feed]
 * [Logout]
-Top Tool Bar
 * [Compose Video for Businesses]
 * [Search Bar]
 
@@ -90,8 +94,14 @@ Top Tool Bar
    * [Create account as User or Business]
 * [Business Feed]
    * [Business Details]
-       * [Map with location and other nearbye stores]
-   * [Customer Story Add]
+   * [Individual Story Add]
+* [Video Creation]
+* [Profile]
+* [Search Bar]
+   * [Map with location and other nearbye stores]
+       * [Click on location and go to Business Details]   
+* [Logout]
+    * [Login] 
 
 ## Wireframes
 <img src='./DhritiWireframes.jpg' width=600>
@@ -105,7 +115,45 @@ https://www.figma.com/file/MCLMLxCI0CXiMtyAhqidaq/BB-App-Wireframing?node-id=3%3
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models
-[Add table of models]
+Individual User
+| Property         | Type   | Description                                           |
+| ---------------- | ------ | ----------------------------------------------------- |
+| Name             | String | Full name of the user                                 |
+| Username         | String | Username used to login                                |
+| Password         | String | Pasword used to login                                 |
+| Top 3 Categories | String | Top 3 Business Categories such as food, clothing, etc |
+
+Business User
+| Property           | Type    | Description                                               |
+| ------------------ | ------- | --------------------------------------------------------- |
+| Business Name      | String  | Full name of the user                                     |
+| Username           | String  | Username used to login                                    |
+| Password           | String  | Pasword used to login                                     |
+| Description        | String  | Quick summary about the business                          |
+| Hours of Operation | String  | When the Business is open                                 |
+| Social Media       | String  | Business instagram and/or facebook account                |
+| Rating             | Number  | Rating of the business out of 5                           |
+| Category           | String  | What is the type of business (Food, Travel, Clothes)      |
+| Location           | String  | Where is the business located                             |
+| Online             | Boolean | Is the business fully online or is there a physical store |
+
+Individual Story Post
+| Property   | Type    | Description                                         |
+| ---------- | ------- | --------------------------------------------------- |
+| User       | Pointer | Points to the individual user who made the post     |
+| Image      | File    | Picture taken at the store of                       |
+| Rating     | Number  | Store the given Rating by the customer              |
+| Likes      | Number  | The number of likes for a given post                |
+| UsersLikes | Array   | Includes users who liked the post                   |
+| Business   | Pointer | Points to the business that the post was made about |
+
+Business Daily Videos
+| Property   | Type    | Description                                     |
+| ---------- | ------- | ----------------------------------------------- |
+| User       | Pointer | Point to the business user who took the video   |
+| Created At | Date    | Includes when the video was taken               |
+| Video      | File    | Two second video that was taken                 |
+| Video Type | String  | Was the video of the store, products, or people |
 ### Networking
 - [Add list of network requests by screen ]
 - [Create basic snippets for each Parse network request]
