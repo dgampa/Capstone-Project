@@ -136,6 +136,7 @@ Business User
 | Category           | String  | What is the type of business (Food, Travel, Clothes)      |
 | Location           | String  | Where is the business located                             |
 | Online             | Boolean | Is the business fully online or is there a physical store |
+| Profile Pic        | File    | Image of the business logo                                |
 
 Individual Story Post
 | Property   | Type    | Description                                         |
@@ -154,7 +155,36 @@ Business Daily Videos
 | Created At | Date    | Includes when the video was taken               |
 | Video      | File    | Two second video that was taken                 |
 | Video Type | String  | Was the video of the store, products, or people |
+
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
+Home Feed
+
+- (Read/GET) Query all business users (name, description, and profile pic) in the same category as the individual user's top 3 categories or the business user's category
+
+Compose User Story
+
+- (Create/POST) Take a picture for a chosen business
+- (Create/POST) Provide a rating for a chosen business
+ 
+Business Details 
+
+- (Read/GET) Query all videos taken by the chosen business
+- (Read/GET) Query chosen business's user details
+- (Read/GET) Query all individual posts made about the chosen business
+- (Create/POST) Like a user story
+- (Delete) Unlike a user story
+    
+Daily Videos
+
+- (Create/POST) Create a new two second video
+
+Profile
+
+- (Update/PUT) Edit user details such as location, interests, hours of operation, etc
+- (Read/GET) Query logged in user object
+
+Search
+
+- (Read/GET) Query businesses within a 15 mile radius of the current user's location
+
 - [OPTIONAL: List endpoints if using existing API such as Yelp]
