@@ -7,5 +7,8 @@
     <string name="etPassword_hint">password</string>
     <string name="btnLogin_title">Login</string>
     <string name="btnSignUp_title">Create An Account</string>
+    <string name="modal_message">Type of Account</string>
+    <string name="btnSignUp_individual">Individual</string>
+    <string name="btnSignUp_business">Business</string>
 
 </resources>
