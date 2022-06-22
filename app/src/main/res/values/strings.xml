@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Behind The Business</string>
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <string name="back4app_app_id">v9VdpmaWn09OixI6KGxs55IBx4fRhP3DbROS0Irh</string>
+    <string name="back4app_client_key">pFzP8O3YEG7PgUvAUYdfU2re5WODsTfj3r4N6Hsr</string>
+    <string name="etUsername_hint">username</string>
+    <string name="etPassword_hint">password</string>
+    <string name="btnLogin_title">Login</string>
+    <string name="btnSignUp_title">Create An Account</string>
+
+</resources>
