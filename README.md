@@ -36,24 +36,24 @@ Provides users with the opportunity to form a personal bond with small businesse
 * login to your account or create either a business or individual account
 * inclue a home feed that includes businesses near you from an api and is geared towards your interests
 * business details page with a compilation video of their two seconds a day if they use the app, with social media, rating, hours of operation, location, and individual stories
-* individual users can post a pictyre and submit a rating for a business that they went to
+* individual users can post a picture and submit a rating for a business that they went to
 * uploading videos every day to create a compilation video
 * map with the closest businesses to you for users
 * profile page with business details that can be edited
 * profile page with individual's interests that can be edited
+* clicking on video opens full screen
+* link the businesses social media and the businesses website
+* search bar to search for a certain category (ex. food, clothing, etc)
 
 **Optional Nice-to-have Stories**
 
 * Clicking on profile picture includes hearted images
-* Clicking on video opens full screen
-* Links to the businesses social media and link to the businesses website
 * Place an order link
 * Favorite A Business, so it shows up on Individuals Profile Page
 * Smoother transitions for creating business videos
 * Allowing businesses to edit the auto created combined video
 * Allowing individuals to post video reviews as well as pictures
 * Push notifications when it is time to upload
-* Search bar to search for a certain category (ex. food, clothing, etc)
 * making individual's picture double sided so that one side is a selfie of yourself and the other is of the business
 * follow your friends to see where they have recently been
 
@@ -63,17 +63,21 @@ Provides users with the opportunity to form a personal bond with small businesse
 * [Login Page]
     * allow users to signup as an idividual or business user
 * [Business Feed]
-    * allow users to look through businesses that match their interests
+   * allow users to look through businesses that match their interests
+   * [Search Bar]
+      *  allow users to look for businesses based on their category 
    * [Business Details Activity]
-       * allow users to look through the business details such as rating hours of operation, location, and social media accounts. Also play a video of the business and allow users to look through other individuals posts about the business
+      * allow users to look through the business details such as rating hours of operation, location, and social media accounts. Also play a video of the business and allow users to look through other individuals posts about the business
    * [Compose Individual Story (only individual users)] 
-       * allow individual users to rate the business and post a picture at the business
+      * allow individual users to rate the business and post a picture at the business
 * [Video Creation (only businesses users)]
     * allow business users to record and choose a two second video clip of the products they sell or the store that gets added to their business video
 * [Profile]
     * displays the current users information and allows for users to edit their information
-* [Search Page]
-    * [Map]
+    * [Logout]
+      * directs user back to the login page
+* [Map Search]
+    * implements google maps
     * allow users to look for businesses near them
 
 
@@ -84,24 +88,26 @@ Provides users with the opportunity to form a personal bond with small businesse
 Bottom Navigation
 * [Profile]
 * [Business Feed]
-* [Logout]
 * [Compose Video for Businesses]
-* [Search Bar]
+
+Top Navigation
+* [Map Search]
 
 **Flow Navigation** (Screen to Screen)
 
 * [Login]
    * [Create account as User or Business]
 * [Business Feed]
+   * [Search Bar]
    * [Business Details]
    * [Individual Story Add]
 * [Video Creation]
 * [Profile]
+   * [Logout]
+      * [Login]
 * [Search Bar]
    * [Map with location and other nearbye stores]
        * [Click on location and go to Business Details]   
-* [Logout]
-    * [Login] 
 
 ## Wireframes
 <img src='./DhritiWireframes.jpg' width=600>
