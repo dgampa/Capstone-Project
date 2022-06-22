@@ -126,7 +126,7 @@ Individual User
 | ---------------- | ------ | ----------------------------------------------------- |
 | Name             | String | Full name of the user                                 |
 | Username         | String | Username used to login                                |
-| Password         | String | Pasword used to login                                 |
+| Password         | String | Password used to login                                |
 | Top 3 Categories | String | Top 3 Business Categories such as food, clothing, etc |
 
 Business User
