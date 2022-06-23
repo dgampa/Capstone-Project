@@ -1,10 +1,10 @@
-package com.example.behindthebusiness.Activities;
+package com.metauniversity.behindthebusiness.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.behindthebusiness.R;
+import com.metauniversity.behindthebusiness.R;
 
 public class IndividualSignupActivity extends AppCompatActivity {
 

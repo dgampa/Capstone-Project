@@ -1,4 +1,4 @@
-package com.example.behindthebusiness.Activities;
+package com.metauniversity.behindthebusiness.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

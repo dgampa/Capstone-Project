@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-</selector>
+<!-- drawable/sign_up_ind.xml -->
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="385dp"
+    android:height="776dp"
+    android:viewportWidth="385"
+    android:viewportHeight="776">
+
+    <group>
+
+        <clip-path
+            android:pathData="M0 0H385V776H0V0Z"
+            />
+
+        <path
+            android:pathData="M0 0V776H385V0"
+            android:fillColor="#B9B8EA"
+            />
+
+    </group>
+
+</vector>

@@ -1,20 +1,18 @@
-package com.example.behindthebusiness.Fragments;
+package com.metauniversity.behindthebusiness.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.behindthebusiness.Activities.BusinessSignupActivity;
-import com.example.behindthebusiness.Activities.IndividualSignupActivity;
-import com.example.behindthebusiness.R;
+import com.metauniversity.behindthebusiness.Activities.BusinessSignupActivity;
+import com.metauniversity.behindthebusiness.Activities.IndividualSignupActivity;
+import com.metauniversity.behindthebusiness.R;
 
 public class UserTypeFragment extends DialogFragment {
 
