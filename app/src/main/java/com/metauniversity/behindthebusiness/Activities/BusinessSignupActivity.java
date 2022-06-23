@@ -1,4 +1,4 @@
-package com.example.behindthebusiness.Activities;
+package com.metauniversity.behindthebusiness.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.behindthebusiness.R;
 
-public class MainActivity extends AppCompatActivity {
+public class BusinessSignupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_business_signup);
     }
 }

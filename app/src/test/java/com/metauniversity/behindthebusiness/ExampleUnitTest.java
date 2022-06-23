@@ -1,4 +1,4 @@
-package com.example.behindthebusiness;
+package com.metauniversity.behindthebusiness;
 
 import org.junit.Test;
 
