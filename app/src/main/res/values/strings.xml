@@ -10,5 +10,9 @@
     <string name="modal_message">Type of Account</string>
     <string name="btnSignUp_individual">Individual</string>
     <string name="btnSignUp_business">Business</string>
+    <string name="individual_account_title">Create an Individual Account</string>
+    <string name="submit_title">Submit</string>
+    <string name="next_title">Next</string>
+    <string name="business_account_title">Create a Business Account</string>
 
 </resources>

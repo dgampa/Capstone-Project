@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources><!--
+Font family: Inter
+Line height: 29sp
+-->
+    <!-- styles.xml -->
+    <style name="create_an_i">
+
+        <item name="android:textSize">
+            24sp
+        </item>
+
+        <item name="android:textColor">
+            #F3EEE4
+        </item>
+
+    </style>
+        <!-- strings.xml -->
+        <string name="create_an_i">
+
+    Create an Individual Account
+    </string>
+
+</resources>

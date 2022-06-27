@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.metauniversity.behindthebusiness.R;
@@ -40,7 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignUp = findViewById(R.id.btnSignUp);
-        btnLogin.setOnClickListener(new View.OnClickListener(){
+
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String username = etUsername.getText().toString();
@@ -51,9 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String username = etUsername.getText().toString();
-//                String password = etPassword.getText().toString();
-//                createAccount(username, password);
                 showUserTypeDialog();
             }
         });
@@ -66,11 +67,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // helper method for onCreate to verify Username and Password
-    private void loginUser(String username, String password){
+    private void loginUser(String username, String password) {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                if(e!=null){
+                if (e != null) {
                     Toast.makeText(LoginActivity.this, "Incorrect Username or Password", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -86,29 +87,5 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
-    }
-
-    // helper method onCreate to create a new user account
-    private void createAccount(String username, String password){
-        // Create the ParseUser
-        ParseUser user = new ParseUser();
-        // Set core properties
-        user.setUsername(username);
-        user.setPassword(password);
-//        user.setEmail("email@example.com");
-//        // Set custom properties
-//        user.put("phone", "650-253-0000");
-        // Invoke signUpInBackground
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e != null) {
-                    Toast.makeText(LoginActivity.this, "Issue with account creation", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                loginUser(username, password);
-                Toast.makeText(LoginActivity.this, "Welcome to Instagram", Toast.LENGTH_SHORT).show();
-            }
-        });
-        goToMainActivity();
     }
 }

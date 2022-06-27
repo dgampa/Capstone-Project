@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- drawable/sign_up_ind.xml -->
+<!-- drawable/sign_up.xml -->
 <vector
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="385dp"
-    android:height="776dp"
+    android:height="750dp"
     android:viewportWidth="385"
     android:viewportHeight="776">
 
@@ -17,7 +16,7 @@
 
         <path
             android:pathData="M0 0V776H385V0"
-            android:fillColor="#B9B8EA"
+            android:fillColor="#E2E2E2"
             />
 
     </group>
