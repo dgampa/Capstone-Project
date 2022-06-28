@@ -2,6 +2,7 @@ package com.metauniversity.behindthebusiness;
 
 import android.app.Application;
 
+import com.metauniversity.behindthebusiness.R;
 import com.parse.Parse;
 
 public class ParseApplication extends Application {

@@ -66,7 +66,7 @@ public class IndividualSignupActivity extends AppCompatActivity {
     }
 
     // helper method onCreate to create a new user account
-    protected void createAccount(String name, String username, String password){
+    protected void createAccount(String name, String username, String password) {
         // Create the ParseUser
         ParseUser user = new ParseUser();
         // Set core properties
@@ -74,29 +74,29 @@ public class IndividualSignupActivity extends AppCompatActivity {
         user.setUsername(username);
         user.setPassword(password);
         // Set custom properties
-        ArrayList <String> categories = new ArrayList<>();
-        if(optRestaurants.isChecked()==true){
+        ArrayList<String> categories = new ArrayList<>();
+        if (optRestaurants.isChecked()) {
             categories.add("Restaurants");
         }
-        if(optFood.isChecked()==true){
+        if (optFood.isChecked()) {
             categories.add("Food");
         }
-        if(optEventPlanningAndServices.isChecked()==true){
+        if (optEventPlanningAndServices.isChecked()) {
             categories.add("Event Planning and Services");
         }
-        if(optHomeServices.isChecked()==true){
+        if (optHomeServices.isChecked()) {
             categories.add("Home Services");
         }
-        if(optHotelAndTravel.isChecked()==true){
+        if (optHotelAndTravel.isChecked()) {
             categories.add("Hotel and Travel");
         }
-        if(optNightlife.isChecked()==true){
+        if (optNightlife.isChecked()) {
             categories.add("Nightlife");
         }
-        if(optLocalFlavor.isChecked()==true){
+        if (optLocalFlavor.isChecked()) {
             categories.add("Local Flavor");
         }
-        if(optPets.isChecked()==true){
+        if (optPets.isChecked()) {
             categories.add("Pets");
         }
         user.put("favoriteCategories", categories);

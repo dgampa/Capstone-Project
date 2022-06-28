@@ -30,7 +30,6 @@ android {
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -40,7 +39,7 @@ dependencies {
     // for logging API calls to LogCat
     implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
     // for using material components for Android
-    implementation 'com.google.android.material:material:<version>'
+    implementation 'com.google.android.material:material:1.6.1'
     // for lottie animation uses
     implementation 'com.airbnb.android:lottie:3.4.0'
     // for parcel implementation
