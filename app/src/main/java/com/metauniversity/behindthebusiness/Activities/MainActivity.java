@@ -8,8 +8,13 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -32,21 +37,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         bottomNavigation = findViewById(R.id.bottomNavigation);
         topAppBar = findViewById(R.id.topAppBar);
-        getSupportActionBar().setCustomView(topAppBar);
-        // set up the top app bar
-        topAppBar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // set up drop down menu with logout option
-                logout();
-            }
-        });
+        //set up the top app bar
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                // set up search
+                switch (item.getItemId()){
+                    case R.id.search:
+                        searchFor(item);
+                        break;
+                    case R.id.more:
+                        logout();
+                        break;
+                }
                 return true;
             }
         });
@@ -79,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
         });
         // set default selection
         bottomNavigation.setSelectedItemId(R.id.action_home);
+    }
+
+    private void searchFor(MenuItem menuItem) {
+        // implement search
+        Toast.makeText(this, "Clicked Search", Toast.LENGTH_SHORT).show();
     }
 
     public void logout() {

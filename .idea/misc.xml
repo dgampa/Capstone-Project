@@ -13,7 +13,7 @@
         <entry key="app/src/main/res/layout/activity_individual_signup.xml" value="0.185333251953125" />
         <entry key="app/src/main/res/layout/activity_launch.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.16818642350557245" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/category_options.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_business_profile.xml" value="0.11322188449848024" />
         <entry key="app/src/main/res/layout/fragment_daily_videos.xml" value="0.11322188449848024" />
@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.35" />
         <entry key="app/src/main/res/menu/nagivation_menu.xml" value="0.1814814814814815" />
-        <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.1814814814814815" />
+        <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.1" />
       </map>
     </option>
   </component>

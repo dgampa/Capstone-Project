@@ -37,7 +37,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class BusinessSignup2Activity extends AppCompatActivity{
-
+    private static final String KEY_BUSINESS_USER = "businessUser";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_SocialFb = "socialFacebook";
     private static final String KEY_RATING = "rating";
@@ -104,12 +104,14 @@ public class BusinessSignup2Activity extends AppCompatActivity{
     }
 
     private void setBusinessUser() {
-        ParseObject businessUser = ParseObject.createWithoutData("BusinessUser", ParseUser.getCurrentUser().getObjectId());
-        businessUser.put(KEY_PROFILEPIC, new ParseFile(imageFile));
-        businessUser.put(KEY_DESCRIPTION, etDescription.getText().toString());
-        businessUser.put(KEY_CATEGORY, tilCategory.getEditText().getText().toString());
-        businessUser.put(KEY_LOCATION, etLocation.getText().toString());
-        businessUser.put(KEY_SocialFb, etSocialFb.getText().toString());
+        BusinessUser businessUser = new BusinessUser();
+        businessUser.setUser(ParseUser.getCurrentUser());
+        businessUser.setDescription(etDescription.getText().toString());
+        businessUser.setCategory(tilCategory.getEditText().getText().toString());
+        businessUser.setLocation(etLocation.getText().toString());
+        businessUser.setSocialFB(etSocialFb.getText().toString());
+
+        //businessUser.put(KEY_PROFILEPIC, new ParseFile(imageFile));
     }
 
     private void selectImage() {
