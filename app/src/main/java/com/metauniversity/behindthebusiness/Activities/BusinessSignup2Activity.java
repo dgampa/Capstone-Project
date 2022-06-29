@@ -1,7 +1,10 @@
 package com.metauniversity.behindthebusiness.Activities;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,9 +28,14 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.metauniversity.behindthebusiness.R;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -35,27 +43,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BusinessSignup2Activity extends AppCompatActivity{
     private static final String KEY_BUSINESS_USER = "businessUser";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_SocialFb = "socialFacebook";
-    private static final String KEY_RATING = "rating";
     private static final String KEY_CATEGORY = "category";
     private static final String KEY_LOCATION = "location";
     private static final String KEY_ONLINE = "isOnline";
     private static final String KEY_PROFILEPIC = "profilePic";
-    Button btnSelectPhoto;
-    ImageView ivProfilePic;
+    private Button btnSelectPhoto;
+    private ImageView ivProfilePic;
     private File imageFile;
-    EditText etDescription;
-    TextInputLayout tilCategory;
-    AutoCompleteTextView actCategory;
-    ArrayList<String> arrayList_categories;
-    ArrayAdapter<String> arrayAdapter_categories;
-    EditText etLocation;
-    EditText etSocialFb;
-    Button btnSubmit;
+    private EditText etDescription;
+    private TextInputLayout tilCategory;
+    private AutoCompleteTextView actCategory;
+    private ArrayList<String> arrayList_categories;
+    private ArrayAdapter<String> arrayAdapter_categories;
+    private EditText etLocation;
+    private EditText etSocialFb;
+    private Button btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,12 +79,12 @@ public class BusinessSignup2Activity extends AppCompatActivity{
         etSocialFb = (EditText) findViewById(R.id.etSocialFB);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-//        btnSelectPhoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                selectImage();
-//            }
-//        });
+        btnSelectPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectImage();
+            }
+        });
 
         arrayList_categories = new ArrayList<>();
         arrayList_categories.add("Restaurants");
@@ -104,16 +112,27 @@ public class BusinessSignup2Activity extends AppCompatActivity{
     }
 
     private void setBusinessUser() {
-        BusinessUser businessUser = new BusinessUser();
-        businessUser.setUser(ParseUser.getCurrentUser());
-        businessUser.setDescription(etDescription.getText().toString());
-        businessUser.setCategory(tilCategory.getEditText().getText().toString());
-        businessUser.setLocation(etLocation.getText().toString());
-        businessUser.setSocialFB(etSocialFb.getText().toString());
-
+        ParseObject businessUser = new ParseObject("BusinessUser");
+        businessUser.put(KEY_BUSINESS_USER, ParseUser.getCurrentUser());
+        businessUser.put(KEY_DESCRIPTION, etDescription.getText().toString());
+        businessUser.put(KEY_CATEGORY, tilCategory.getEditText().getText().toString());
+        businessUser.put(KEY_LOCATION, etLocation.getText().toString());
+        businessUser.put(KEY_SocialFb, etSocialFb.getText().toString());
         //businessUser.put(KEY_PROFILEPIC, new ParseFile(imageFile));
+        // Saves the new object.
+        businessUser.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e==null){
+                    //Save was done
+                }else{
+                    //Something went wrong
+                    Log.e("Business Signup 2 Activity", e.getMessage());
+                    Toast.makeText(BusinessSignup2Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
-
     private void selectImage() {
         final CharSequence[] options = {"Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(BusinessSignup2Activity.this);
@@ -122,8 +141,10 @@ public class BusinessSignup2Activity extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Choose from Gallery")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, 1);
+                    Intent i = new Intent();
+                    i.setType("image/*");
+                    i.setAction(Intent.ACTION_GET_CONTENT);
+                    launchSomeActivity.launch(i);
                 } else if (options[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
@@ -131,38 +152,31 @@ public class BusinessSignup2Activity extends AppCompatActivity{
         });
         builder.show();
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        imageFile = getPhotoFileUri("image.jpg");
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
-                Uri selectedImage = data.getData();
-                String[] filePath = {MediaStore.Images.Media.DATA};
-                if (selectedImage != null) {
-                    Cursor cursor = getContentResolver().query(selectedImage, filePath, null, null, null);
-                    if (cursor != null) {
-                        cursor.moveToFirst();
-                        int columnIndex = cursor.getColumnIndex(filePath[0]);
-                        String picturePath = cursor.getString(columnIndex);
-                        ivProfilePic.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-                        cursor.close();
+    ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    if (data != null && data.getData() != null) {
+                        imageFile = getPhotoFileUri("image.jpg");
+                        Uri selectedImageUri = data.getData();
+                        Bitmap selectedImageBitmap = null;
+                        try {
+                            selectedImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                        }
+                        catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        ivProfilePic.setImageBitmap(selectedImageBitmap);
                     }
                 }
-                Log.w("path of image from gallery......******************.........", filePath + "");
-            }
-        }
-    }
-
-    private File getPhotoFileUri(String s) {
+            });
+    private File getPhotoFileUri(String photoFileName) {
         File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "BusinessSignup2Activity");
         // create the storage directory if it does not exit
         if(!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
             Log.d("BusinessSignup2Activity", "failed to create directory");
         }
         // return the file target for the photo based on the file name
-        File file = new File(mediaStorageDir.getPath() + File.separator + "image.jpg");
+        File file = new File(mediaStorageDir.getPath() + File.separator + photoFileName);
         return file;
     }
 

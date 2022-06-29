@@ -15,6 +15,7 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 public class BusinessSignupActivity extends AppCompatActivity {
@@ -49,7 +50,11 @@ public class BusinessSignupActivity extends AppCompatActivity {
                 String name = etBusinessName.getText().toString();
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
-                createBusAccount(name, username, password);
+                try {
+                    createBusAccount(name, username, password);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 boolean isOnline = false;
                 if (rbOnline.isChecked()){
                     isOnline = true;
@@ -67,9 +72,20 @@ public class BusinessSignupActivity extends AppCompatActivity {
     private void setBusinessUser( ParseUser currentUser, Boolean isOnline) {
         ParseObject businessUser = ParseObject.create("BusinessUser");
         businessUser.put(KEY_ONLINE, isOnline);
+        businessUser.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e==null){
+                    //Save was done
+                }else{
+                    //Something went wrong
+                    Toast.makeText(BusinessSignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
-    protected void createBusAccount(String name, String username, String password) {
+    protected void createBusAccount(String name, String username, String password) throws ParseException {
 
         // Create the ParseUser
         ParseUser user = new ParseUser();
@@ -80,14 +96,7 @@ public class BusinessSignupActivity extends AppCompatActivity {
         // Set custom properties
         user.put("isBusiness", true);
         // Invoke signUpInBackground
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e != null) {
-                    Toast.makeText(BusinessSignupActivity.this, "Issue with account creation", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
+        user.signUp();
     }
 
     private void jumpToPage2() {
