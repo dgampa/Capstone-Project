@@ -1,9 +1,133 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!-- Sign-up - Customer -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.BusinessSignupActivity">
+    android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/sign_up_ind"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/sign_up"
+        android:clipToOutline="true">
+
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="104dp"
+            android:layout_height="113dp"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/logo_bb" />
+
+        <TextView
+            android:id="@+id/tvBusinessAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivLogo"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="25dp"
+            android:layout_toEndOf="@+id/ivLogo"
+            android:gravity="center_horizontal|top"
+            android:text="@string/business_account_title"
+            android:textAppearance="@style/create_an_i"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/etBusinessName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/ivLogo"
+            android:layout_margin="15dp"
+            android:layout_marginTop="15dp"
+            android:hint="Enter Business Name"
+            android:inputType="textShortMessage|none"
+            android:textColor="#076B4D"
+            android:textColorHint="#076B4D" />
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/etBusinessName"
+            android:layout_margin="15dp"
+            android:layout_marginTop="15dp"
+            android:hint="Enter Username"
+            android:inputType="textShortMessage|none"
+            android:textColor="#076B4D"
+            android:textColorHint="#076B4D" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/etUsername"
+            android:layout_margin="15dp"
+            android:layout_marginTop="15dp"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:textColor="#076B4D"
+            android:textColorHint="#076B4D" />
+
+        <TextView
+            android:id="@+id/tvBusinessQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etPassword"
+            android:layout_marginLeft="15dp"
+            android:text="Type of Business"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <RadioGroup
+            android:id="@+id/tvBusinessType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvBusinessQuestion"
+            android:layout_marginLeft="15dp">
+
+            <RadioButton
+                android:id="@+id/rbPhysical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Physical Store(s)"
+                android:textColor="#076B4D"
+                app:buttonTint="#076B4D" />
+
+            <RadioButton
+                android:id="@+id/rbOnline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Online"
+                android:textColor="#076B4D"
+                app:buttonTint="#076B4D" />
+
+            <RadioButton
+                android:id="@+id/rbBoth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Both"
+                android:textColor="#076B4D"
+                app:buttonTint="#076B4D" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="27dp"
+            android:text="@string/next_title"
+            android:textColor="#076B4D"
+            app:cornerRadius="@android:dimen/app_icon_size"
+            tools:visibility="visible" />
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
