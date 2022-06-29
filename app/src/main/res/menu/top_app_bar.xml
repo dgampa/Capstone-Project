@@ -9,9 +9,9 @@
         app:showAsAction="ifRoom|collapseActionView" />
     <item
         android:id="@+id/more"
-        android:title="Logout"
         android:contentDescription="Includes logout button"
-        app:showAsAction="never" >
+        android:title="Logout"
+        app:showAsAction="never">
 
     </item>
 

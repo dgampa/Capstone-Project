@@ -45,7 +45,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusinessSignup2Activity extends AppCompatActivity{
+public class BusinessSignup2Activity extends AppCompatActivity {
     private static final String KEY_BUSINESS_USER = "businessUser";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_SocialFb = "socialFacebook";
@@ -123,9 +123,9 @@ public class BusinessSignup2Activity extends AppCompatActivity{
         businessUser.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if (e==null){
+                if (e == null) {
                     //Save was done
-                }else{
+                } else {
                     //Something went wrong
                     Log.e("Business Signup 2 Activity", e.getMessage());
                     Toast.makeText(BusinessSignup2Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -133,6 +133,7 @@ public class BusinessSignup2Activity extends AppCompatActivity{
             }
         });
     }
+
     private void selectImage() {
         final CharSequence[] options = {"Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(BusinessSignup2Activity.this);
@@ -152,27 +153,28 @@ public class BusinessSignup2Activity extends AppCompatActivity{
         });
         builder.show();
     }
+
     ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    if (data != null && data.getData() != null) {
-                        imageFile = getPhotoFileUri("image.jpg");
-                        Uri selectedImageUri = data.getData();
-                        Bitmap selectedImageBitmap = null;
-                        try {
-                            selectedImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
-                        }
-                        catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        ivProfilePic.setImageBitmap(selectedImageBitmap);
-                    }
+        if (result.getResultCode() == Activity.RESULT_OK) {
+            Intent data = result.getData();
+            if (data != null && data.getData() != null) {
+                imageFile = getPhotoFileUri("image.jpg");
+                Uri selectedImageUri = data.getData();
+                Bitmap selectedImageBitmap = null;
+                try {
+                    selectedImageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            });
+                ivProfilePic.setImageBitmap(selectedImageBitmap);
+            }
+        }
+    });
+
     private File getPhotoFileUri(String photoFileName) {
         File mediaStorageDir = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "BusinessSignup2Activity");
         // create the storage directory if it does not exit
-        if(!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
             Log.d("BusinessSignup2Activity", "failed to create directory");
         }
         // return the file target for the photo based on the file name

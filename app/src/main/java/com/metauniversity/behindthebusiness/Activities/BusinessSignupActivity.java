@@ -56,7 +56,7 @@ public class BusinessSignupActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 boolean isOnline = false;
-                if (rbOnline.isChecked()){
+                if (rbOnline.isChecked()) {
                     isOnline = true;
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
@@ -69,15 +69,15 @@ public class BusinessSignupActivity extends AppCompatActivity {
 
     }
 
-    private void setBusinessUser( ParseUser currentUser, Boolean isOnline) {
+    private void setBusinessUser(ParseUser currentUser, Boolean isOnline) {
         ParseObject businessUser = ParseObject.create("BusinessUser");
         businessUser.put(KEY_ONLINE, isOnline);
         businessUser.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if (e==null){
+                if (e == null) {
                     //Save was done
-                }else{
+                } else {
                     //Something went wrong
                     Toast.makeText(BusinessSignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
