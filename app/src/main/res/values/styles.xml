@@ -16,8 +16,8 @@ Line height: 29sp
         </item>
 
     </style>
-        <!-- strings.xml -->
-        <string name="create_an_i">
+    <!-- strings.xml -->
+    <string name="create_an_i">
 
     Create an Individual Account
     </string>
