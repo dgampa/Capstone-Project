@@ -8,10 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,25 +22,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.metauniversity.behindthebusiness.R;
-import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class BusinessSignup2Activity extends AppCompatActivity {
     private static final String KEY_BUSINESS_USER = "businessUser";
@@ -71,7 +59,7 @@ public class BusinessSignup2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_business_signup2);
 
         btnSelectPhoto = (Button) findViewById(R.id.btnSelectPhoto);
-        ivProfilePic = (ImageView) findViewById(R.id.ivProfilePic);
+        ivProfilePic = (ImageView) findViewById(R.id.ivProfileImage);
         etDescription = (EditText) findViewById(R.id.etDescription);
         tilCategory = (TextInputLayout) findViewById(R.id.tilCategory);
         actCategory = (AutoCompleteTextView) findViewById(R.id.actCategory);

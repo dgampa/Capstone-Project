@@ -1,4 +1,4 @@
-package com.metauniversity.behindthebusiness.Activities;
+package com.metauniversity.behindthebusiness;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +12,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.metauniversity.behindthebusiness.Activities.LoginActivity;
 import com.metauniversity.behindthebusiness.Fragments.BusinessProfileFragment;
 import com.metauniversity.behindthebusiness.Fragments.DailyVideosFragment;
 import com.metauniversity.behindthebusiness.Fragments.HomeFragment;
 import com.metauniversity.behindthebusiness.Fragments.IndividualProfileFragment;
 import com.metauniversity.behindthebusiness.Fragments.MapSearchFragment;
-import com.metauniversity.behindthebusiness.R;
 import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {

@@ -47,7 +47,7 @@
             android:name=".Activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name=".MainActivity"
             android:exported="false" />
 
         <meta-data
