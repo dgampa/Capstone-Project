@@ -49,7 +49,6 @@ public class BusinessSignup2Activity extends AppCompatActivity {
     private AutoCompleteTextView actCategory;
     private ArrayList<String> arrayList_categories;
     private ArrayAdapter<String> arrayAdapter_categories;
-    private EditText etLocation;
     private EditText etSocialFb;
     private Button btnSubmit;
 
@@ -63,7 +62,6 @@ public class BusinessSignup2Activity extends AppCompatActivity {
         etDescription = (EditText) findViewById(R.id.etDescription);
         tilCategory = (TextInputLayout) findViewById(R.id.tilCategory);
         actCategory = (AutoCompleteTextView) findViewById(R.id.actCategory);
-        etLocation = (EditText) findViewById(R.id.etLocation);
         etSocialFb = (EditText) findViewById(R.id.etSocialFB);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
@@ -104,7 +102,6 @@ public class BusinessSignup2Activity extends AppCompatActivity {
         businessUser.put(KEY_BUSINESS_USER, ParseUser.getCurrentUser());
         businessUser.put(KEY_DESCRIPTION, etDescription.getText().toString());
         businessUser.put(KEY_CATEGORY, tilCategory.getEditText().getText().toString());
-        businessUser.put(KEY_LOCATION, etLocation.getText().toString());
         businessUser.put(KEY_SocialFb, etSocialFb.getText().toString());
         //businessUser.put(KEY_PROFILEPIC, new ParseFile(imageFile));
         // Saves the new object.
