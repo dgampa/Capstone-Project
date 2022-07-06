@@ -9,6 +9,8 @@ public class YelpBusiness {
     private String imageUrl;
     @SerializedName("rating")
     private double rating;
+    @SerializedName("distance")
+    private double distanceAway;
 
     public String getName() {
         return name;
@@ -32,5 +34,13 @@ public class YelpBusiness {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public double getDistanceAway() {
+        return distanceAway*0.000621371;
+    }
+
+    public void setDistanceAway(double distanceAway) {
+        this.distanceAway = distanceAway*0.000621371;
     }
 }

@@ -26,9 +26,6 @@ public class BusinessSignupActivity extends AppCompatActivity {
     private EditText etBusinessName;
     private EditText etUsername;
     private EditText etPassword;
-    private RadioButton rbPhysical;
-    private RadioButton rbOnline;
-    private RadioButton rbBoth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +37,6 @@ public class BusinessSignupActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnNext = findViewById(R.id.btnNext);
-        rbPhysical = findViewById(R.id.rbPhysical);
-        rbOnline = findViewById(R.id.rbOnline);
-        rbBoth = findViewById(R.id.rbBoth);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,34 +49,11 @@ public class BusinessSignupActivity extends AppCompatActivity {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                boolean isOnline = false;
-                if (rbOnline.isChecked()) {
-                    isOnline = true;
-                }
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                setBusinessUser(currentUser, isOnline);
-                // fire an intent to the next LoginPage
                 jumpToPage2();
                 Toast.makeText(BusinessSignupActivity.this, "Please complete additional information", Toast.LENGTH_SHORT).show();
             }
         });
 
-    }
-
-    private void setBusinessUser(ParseUser currentUser, Boolean isOnline) {
-        ParseObject businessUser = ParseObject.create("BusinessUser");
-        businessUser.put(KEY_ONLINE, isOnline);
-        businessUser.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    //Save was done
-                } else {
-                    //Something went wrong
-                    Toast.makeText(BusinessSignupActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     protected void createBusAccount(String name, String username, String password) throws ParseException {
@@ -95,7 +66,7 @@ public class BusinessSignupActivity extends AppCompatActivity {
         user.setPassword(password);
         // Set custom properties
         user.put("isBusiness", true);
-        // Invoke signUpInBackground
+        // Invoke signUp
         user.signUp();
     }
 
