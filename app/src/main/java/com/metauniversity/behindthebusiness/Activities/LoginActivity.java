@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.metauniversity.behindthebusiness.MainActivity;
 import com.metauniversity.behindthebusiness.R;
 import com.metauniversity.behindthebusiness.Fragments.UserTypeFragment;
 import com.parse.LogInCallback;

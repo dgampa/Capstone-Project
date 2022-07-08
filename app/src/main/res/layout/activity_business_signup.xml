@@ -73,47 +73,6 @@
             android:textColor="#076B4D"
             android:textColorHint="#076B4D" />
 
-        <TextView
-            android:id="@+id/tvBusinessQuestion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/etPassword"
-            android:layout_marginLeft="15dp"
-            android:text="Type of Business"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-        <RadioGroup
-            android:id="@+id/tvBusinessType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvBusinessQuestion"
-            android:layout_marginLeft="15dp">
-
-            <RadioButton
-                android:id="@+id/rbPhysical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Physical Store(s)"
-                android:textColor="#076B4D"
-                app:buttonTint="#076B4D" />
-
-            <RadioButton
-                android:id="@+id/rbOnline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Online"
-                android:textColor="#076B4D"
-                app:buttonTint="#076B4D" />
-
-            <RadioButton
-                android:id="@+id/rbBoth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Both"
-                android:textColor="#076B4D"
-                app:buttonTint="#076B4D" />
-        </RadioGroup>
-
         <Button
             android:id="@+id/btnNext"
             android:layout_width="wrap_content"

@@ -10,7 +10,7 @@
     <item
         android:id="@+id/action_dailyVideos"
         android:enabled="true"
-        android:icon="@drawable/videos_icon"
+        android:icon="@drawable/camera_add_icon"
         android:title="DailyVideos" />
     <item
         android:id="@+id/action_mapSearch"
