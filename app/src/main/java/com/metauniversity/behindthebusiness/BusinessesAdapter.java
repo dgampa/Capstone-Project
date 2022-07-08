@@ -116,7 +116,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
         public void bind(YelpBusiness business) {
             businessName = business.getName();
             tvBusinessName.setText(businessName);
-            Glide.with(context).load(business.getImageUrl()).into(ivProfileImage);
+            Glide.with(context).asBitmap().load(business.getImageUrl()).into(ivProfileImage);
 
             if (!business.getImageUrl().equals("none")) {
                 Glide.with(context).load(business.getImageUrl()).into(ivProfileImage);
