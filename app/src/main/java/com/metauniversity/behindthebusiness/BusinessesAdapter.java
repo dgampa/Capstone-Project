@@ -78,6 +78,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
         ConstraintLayout condensedView;
         ImageView ivProfileImage;
         TextView tvBusinessName;
+        ImageView ivOpenIcon;
         ImageButton btnAddPic;
         RatingBar rbBusinessRating;
         ConstraintLayout expandableView;
@@ -97,6 +98,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
             condensedView = itemView.findViewById(R.id.condensedView);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBusinessName = itemView.findViewById(R.id.tvBusinessName);
+            ivOpenIcon = itemView.findViewById(R.id.ivOpenIcon);
             btnAddPic = itemView.findViewById(R.id.btnAddPic);
             rbBusinessRating = itemView.findViewById(R.id.rbBusinessRating);
             expandableView = itemView.findViewById(R.id.expandableView);
@@ -147,7 +149,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
             rbBusinessRating.setIsIndicator(true);
             tvLocation.setText(business.getLocation().formattedLocation());
             String businessID = business.getId();
-            setBusinessHours(businessID);
+            setBusinessDetails(businessID);
         }
 
         private void showMore(View view) {
@@ -160,7 +162,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
             }
         }
 
-        private void setBusinessHours(String businessID) {
+        private void setBusinessDetails(String businessID) {
             Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
             YelpService yelpService = retrofit.create(YelpService.class);
             Call<YelpBusinessDetails> call = yelpService.searchForDetails("Bearer " + API_KEY, businessID);
@@ -173,9 +175,13 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
                     if (businessDetails == null || businessDetails.getHours() == null) {
                         tvHoursOfOperation.setText("No Hours Available \n");
                     } else {
+                        // set business hours of operation
                         YelpBusinessHours businessHours = businessDetails.getHours().get(0);
                         List<YelpDailyHours> dailyHoursList = businessHours.getDailyHours();
                         tvHoursOfOperation.setText(getFormattedHours(dailyHoursList));
+                        // set is the business open
+                        if(businessHours.getOpen())
+                            ivOpenIcon.setVisibility(View.VISIBLE);
                     }
                 }
 

@@ -23,7 +23,7 @@
                 android:id="@+id/ivProfileImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="4dp"
                 android:scaleType="center"
                 app:layout_constraintStart_toStartOf="parent"
@@ -36,17 +36,17 @@
                 android:id="@+id/tvBusinessName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@id/ivProfileImage"
                 android:gravity="center"
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/rbBusinessRating"
+                app:layout_constraintEnd_toStartOf="@+id/ivOpenIcon"
                 app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.183" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/btnAddPic"
@@ -70,9 +70,19 @@
                 android:scaleY="0.5"
                 android:stepSize=".5"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivOpenIcon"
+                app:layout_constraintStart_toEndOf="@+id/ivProfileImage" />
+
+            <ImageView
+                android:id="@+id/ivOpenIcon"
+                android:layout_width="49dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="10dp"
+                android:scaleType="centerInside"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
-                app:layout_constraintTop_toBottomOf="@+id/tvBusinessName" />
+                app:layout_constraintTop_toTopOf="@+id/tvBusinessName"
+                app:srcCompat="@drawable/open_sign_icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
