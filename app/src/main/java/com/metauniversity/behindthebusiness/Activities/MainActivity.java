@@ -56,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 boolean isBusiness = (boolean) ParseUser.getCurrentUser().get("isBusiness");
                 switch (item.getItemId()) {
                     case R.id.action_dailyVideos:
-                        if(isBusiness)
+                        if (isBusiness)
                             fragment = new BusinessVideoUploadFragment();
-                       else{
-                           Intent intent = new Intent(MainActivity.this, CustomerReviewActivity.class);
-                           startActivity(intent);
-                           fragment = new HomeFragment();
+                        else {
+                            Intent intent = new Intent(MainActivity.this, CustomerReviewActivity.class);
+                            startActivity(intent);
+                            fragment = new HomeFragment();
                         }
-                       break;
+                        break;
                     case R.id.action_profile:
                         if (isBusiness)
                             fragment = new BusinessProfileFragment();

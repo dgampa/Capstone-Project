@@ -2,15 +2,24 @@ package com.metauniversity.behindthebusiness.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Query;
+
 public class YelpBusiness {
-    @SerializedName("name")
+    public static final double mileInMeter = 0.000621371;
     private String name;
     @SerializedName("image_url")
     private String imageUrl;
-    @SerializedName("rating")
     private double rating;
     @SerializedName("distance")
     private double distanceAway;
+    @SerializedName("location")
+    private YelpLocation location;
+    private String id;
 
     public String getName() {
         return name;
@@ -37,10 +46,26 @@ public class YelpBusiness {
     }
 
     public double getDistanceAway() {
-        return distanceAway*0.000621371;
+        return distanceAway * mileInMeter;
     }
 
     public void setDistanceAway(double distanceAway) {
-        this.distanceAway = distanceAway*0.000621371;
+        this.distanceAway = distanceAway * mileInMeter;
+    }
+
+    public YelpLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(YelpLocation location) {
+        this.location = location;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

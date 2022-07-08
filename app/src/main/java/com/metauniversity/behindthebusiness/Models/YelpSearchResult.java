@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Properties;
 
 public class YelpSearchResult {
-    @SerializedName("total")
     private int total;
     @SerializedName("businesses")
     private List<YelpBusiness> businesses;

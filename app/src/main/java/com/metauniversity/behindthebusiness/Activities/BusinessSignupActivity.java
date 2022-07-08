@@ -45,7 +45,7 @@ public class BusinessSignupActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
                 try {
-                    createBusAccount(name, username, password);
+                    createBusinessAccount(name, username, password);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -56,7 +56,7 @@ public class BusinessSignupActivity extends AppCompatActivity {
 
     }
 
-    protected void createBusAccount(String name, String username, String password) throws ParseException {
+    protected void createBusinessAccount(String name, String username, String password) throws ParseException {
 
         // Create the ParseUser
         ParseUser user = new ParseUser();

@@ -86,12 +86,13 @@ public class HomeFragment extends Fragment {
         scrollListener = (new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                loadNextData(totalItemsCount+=20);
+                loadNextData(totalItemsCount += 20);
             }
         });
         // Adds the scroll listener to RecyclerView
         rvBusinesses.addOnScrollListener(scrollListener);
     }
+
     private void loadNextData(int offset) {
         // This method probably sends out a network request and appends new data items to your adapter.
         // Use the offset value and add it as a parameter to your API request to retrieve paginated data.
@@ -115,12 +116,12 @@ public class HomeFragment extends Fragment {
             categories += favoriteCategories.get(i);
             Log.i("HomeFragment", "categories searched: " + categories);
         }
-        Call<YelpSearchResult> call = yelpService.searchRestaurants("Bearer " + API_KEY, categories, location);
+        Call<YelpSearchResult> call = yelpService.searchBusinesses("Bearer " + API_KEY, categories, location);
         call.enqueue(new Callback<YelpSearchResult>() {
             @Override
             public void onResponse(Call<YelpSearchResult> call, Response<YelpSearchResult> response) {
                 // checking for code 200 to confirm a successful call
-                Log.i(TAG, "onResponse: " + response.code() + "total: " + response.body().getTotal());
+                Log.i(TAG, "onResponse: " + response + "total: " + response.body().getTotal());
                 YelpSearchResult body = response.body();
                 businessList.addAll(body.getBusinesses());
                 adapter.notifyDataSetChanged();
