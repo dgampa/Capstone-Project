@@ -8,19 +8,12 @@ import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.metauniversity.behindthebusiness.Fragments.BusinessProfileFragment;
-import com.metauniversity.behindthebusiness.Fragments.DailyVideosFragment;
+import com.metauniversity.behindthebusiness.Fragments.BusinessVideoUploadFragment;
 import com.metauniversity.behindthebusiness.Fragments.HomeFragment;
 import com.metauniversity.behindthebusiness.Fragments.IndividualProfileFragment;
 import com.metauniversity.behindthebusiness.Fragments.MapSearchFragment;
@@ -63,8 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 boolean isBusiness = (boolean) ParseUser.getCurrentUser().get("isBusiness");
                 switch (item.getItemId()) {
                     case R.id.action_dailyVideos:
-                        fragment = new DailyVideosFragment();
-                        break;
+                        if(isBusiness)
+                            fragment = new BusinessVideoUploadFragment();
+                       else{
+                           Intent intent = new Intent(MainActivity.this, CustomerReviewActivity.class);
+                           startActivity(intent);
+                           fragment = new HomeFragment();
+                        }
+                       break;
                     case R.id.action_profile:
                         if (isBusiness)
                             fragment = new BusinessProfileFragment();
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new HomeFragment();
                         break;
                 }
-                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.flSubContainer, fragment).commit();
                 return true;
             }
         });

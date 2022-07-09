@@ -1,4 +1,4 @@
-package com.metauniversity.behindthebusiness.Activities;
+package com.metauniversity.behindthebusiness;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;

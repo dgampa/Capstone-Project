@@ -24,11 +24,18 @@
         <entry key="app/src/main/res/layout/fragment_daily_videos.xml" value="0.11322188449848024" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.11322188449848024" />
         <entry key="app/src/main/res/layout/fragment_individual_profile.xml" value="0.11322188449848024" />
+<<<<<<< HEAD
         <entry key="app/src/main/res/layout/fragment_location_change.xml" value="0.13272543059777103" />
         <entry key="app/src/main/res/layout/fragment_map_search.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.11322188449848024" />
         <entry key="app/src/main/res/layout/fragment_user_type.xml" value="0.22514648437499996" />
         <entry key="app/src/main/res/layout/item_business.xml" value="0.26033204844300173" />
+=======
+        <entry key="app/src/main/res/layout/fragment_map_search.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.11322188449848024" />
+        <entry key="app/src/main/res/layout/fragment_user_type.xml" value="0.22514648437499996" />
+        <entry key="app/src/main/res/layout/item_business.xml" value="0.25704225352112675" />
+>>>>>>> 187dffcc35e8c62c7245a784a94676a0d170e5d9
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.35" />
         <entry key="app/src/main/res/menu/business_bottom_navigation_menu.xml" value="0.25092592592592594" />
