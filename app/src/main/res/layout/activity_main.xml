@@ -27,22 +27,6 @@
             app:title="@string/app_name" />
 
 
-<<<<<<< HEAD
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/business_bottom_navigation_menu" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-=======
         <FrameLayout
             android:id="@+id/flSubContainer"
             android:layout_width="397dp"
@@ -77,4 +61,3 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
->>>>>>> 187dffcc35e8c62c7245a784a94676a0d170e5d9
