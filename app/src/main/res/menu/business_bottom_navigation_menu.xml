@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/home_icon"
+        android:title="Home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_dailyVideos"
+        android:enabled="true"
+        android:icon="@drawable/camera_add_icon"
+        android:title="DailyVideos" />
+    <item
+        android:id="@+id/action_profile"
+        android:enabled="true"
+        android:icon="@drawable/profile_icon"
+        android:title="Profile" />
+</menu>
