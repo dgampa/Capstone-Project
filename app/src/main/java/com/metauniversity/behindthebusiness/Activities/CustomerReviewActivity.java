@@ -1,16 +1,14 @@
 package com.metauniversity.behindthebusiness.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.metauniversity.behindthebusiness.R;
-import com.metauniversity.behindthebusiness.IndividualPost;
+import com.metauniversity.behindthebusiness.UserPost;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,9 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -38,7 +34,7 @@ public class CustomerReviewActivity extends AppCompatActivity {
     private File photoFile;
     private String photoFileName = "photo.jpg";
     private float rating;
-    TextView tvBusiness;
+    TextView tvBusinessName;
     ImageButton ibExit;
     Button btnCapture;
     ImageView ivPost;
@@ -50,7 +46,7 @@ public class CustomerReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_review);
         getSupportActionBar().hide();
-        tvBusiness = findViewById(R.id.tvBusiness);
+        tvBusinessName = findViewById(R.id.tvBusinessName);
         ibExit = findViewById(R.id.ibExit);
         btnCapture = findViewById(R.id.btnCapture);
         ivPost = findViewById(R.id.ivPost);
@@ -81,7 +77,11 @@ public class CustomerReviewActivity extends AppCompatActivity {
 
     private void saveRating() {
         rating = ratingBar.getRating();
-        savePost(ParseUser.getCurrentUser(), photoFile, rating);
+        try {
+            savePost(ParseUser.getCurrentUser(), photoFile, rating);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     private void launchCamera() {
@@ -125,19 +125,20 @@ public class CustomerReviewActivity extends AppCompatActivity {
         return file;
     }
 
-    private void savePost(ParseUser currentUser, File photoFile, Number rating) {
-        IndividualPost post = new IndividualPost();
+    private void savePost(ParseUser currentUser, File photoFile, Number rating) throws ParseException {
+        UserPost post = new UserPost();
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
         post.setRating(rating);
-        post.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e!=null){
-                    Log.e("CustomerReviewActivity", "Error while saving", e);
-                }
-                Log.i("CustomerReviewActivity", "Post save was successful!");
-            }
-        });
+        post.save();
+//        post.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e!=null){
+//                    Log.e("CustomerReviewActivity", "Error while saving", e);
+//                }
+//                Log.i("CustomerReviewActivity", "Post save was successful!");
+//            }
+//        });
     }
 }
