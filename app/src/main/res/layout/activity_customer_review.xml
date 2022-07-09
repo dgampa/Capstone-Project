@@ -42,7 +42,7 @@
             android:text="Capture the Moment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvBusinessNamegit" />
+            app:layout_constraintTop_toBottomOf="@+id/tvBusinessName" />
 
         <ImageView
             android:id="@+id/ivPost"

@@ -8,11 +8,16 @@
         android:title="Search"
         app:showAsAction="ifRoom|collapseActionView" />
     <item
-        android:id="@+id/more"
+        android:id="@+id/logout"
         android:contentDescription="Includes logout button"
         android:title="Logout"
         app:showAsAction="never">
-
+    </item>
+    <item
+        android:id="@+id/locationChange"
+        android:contentDescription="Includes location change option"
+        android:title="Change Location"
+        app:showAsAction="never">
     </item>
 
 </menu>

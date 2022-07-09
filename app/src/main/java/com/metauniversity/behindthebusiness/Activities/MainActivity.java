@@ -17,13 +17,14 @@ import com.metauniversity.behindthebusiness.Fragments.BusinessVideoUploadFragmen
 import com.metauniversity.behindthebusiness.Fragments.HomeFragment;
 import com.metauniversity.behindthebusiness.Fragments.IndividualProfileFragment;
 import com.metauniversity.behindthebusiness.Fragments.MapSearchFragment;
+import com.metauniversity.behindthebusiness.Fragments.LocationChangeFragment;
 import com.metauniversity.behindthebusiness.R;
 import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     final FragmentManager fragmentManager = getSupportFragmentManager();
-    private Toolbar topAppBar;
+    public static final boolean isBusiness = (boolean) ParseUser.getCurrentUser().get("isBusiness");
     private BottomNavigationView bottomNavigation;
 
     @Override
@@ -31,29 +32,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        bottomNavigation = findViewById(R.id.bottomNavigation);
-        topAppBar = findViewById(R.id.topAppBar);
-        //set up the top app bar
-        topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.search:
-                        searchFor(item);
-                        break;
-                    case R.id.more:
-                        logout();
-                        break;
-                }
-                return true;
-            }
-        });
+        if (isBusiness) {
+            bottomNavigation = findViewById(R.id.businessBottomNavigation);
+        } else {
+            bottomNavigation = findViewById(R.id.individualBottomNavigation);
+        }
         // set up the navigation tool bar
         bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
-                boolean isBusiness = (boolean) ParseUser.getCurrentUser().get("isBusiness");
                 switch (item.getItemId()) {
                     case R.id.action_dailyVideos:
                         if (isBusiness)
@@ -85,16 +73,4 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation.setSelectedItemId(R.id.action_home);
     }
 
-    private void searchFor(MenuItem menuItem) {
-        // implement search
-        Toast.makeText(this, "Clicked Search", Toast.LENGTH_SHORT).show();
-    }
-
-    public void logout() {
-        ParseUser.logOut();
-        // explicit intent to return to login page
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
 }

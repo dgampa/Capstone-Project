@@ -18,7 +18,7 @@ public class YelpBusinessHours {
         this.dailyHours = dailyHours;
     }
 
-    public boolean isOpen() {
+    public boolean getOpen() {
         return isOpen;
     }
 
