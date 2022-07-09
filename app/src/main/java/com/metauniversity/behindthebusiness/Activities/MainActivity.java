@@ -31,13 +31,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        bottomNavigation = findViewById(R.id.bottomNavigation);
+        if (isBusiness) {
+            bottomNavigation = findViewById(R.id.businessBottomNavigation);
+        } else {
+            bottomNavigation = findViewById(R.id.individualBottomNavigation);
+        }
         // set up the navigation tool bar
         bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
-                boolean isBusiness = (boolean) ParseUser.getCurrentUser().get("isBusiness");
                 switch (item.getItemId()) {
                     case R.id.action_dailyVideos:
                         if (isBusiness)
