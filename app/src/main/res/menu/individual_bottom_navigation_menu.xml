@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/home_icon"
+        android:title="Home"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_dailyVideos"
+        android:enabled="true"
+        android:icon="@drawable/videos_icon"
+        android:title="DailyVideos" />
+    <item
+        android:id="@+id/action_mapSearch"
+        android:enabled="true"
+        android:icon="@drawable/map_icon"
+        android:title="Nearby"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_profile"
+        android:enabled="true"
+        android:icon="@drawable/profile_icon"
+        android:title="Profile" />
+</menu>

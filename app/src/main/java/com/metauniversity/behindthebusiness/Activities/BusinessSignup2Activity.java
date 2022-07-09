@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 import com.metauniversity.behindthebusiness.R;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -47,8 +48,8 @@ public class BusinessSignup2Activity extends AppCompatActivity {
     private EditText etDescription;
     private TextInputLayout tilCategory;
     private AutoCompleteTextView actCategory;
-    private ArrayList<String> arrayList_categories;
-    private ArrayAdapter<String> arrayAdapter_categories;
+    private ArrayList<String> arrayListCategories;
+    private ArrayAdapter<String> arrayAdapterCategories;
     private EditText etSocialFb;
     private Button btnSubmit;
 
@@ -72,25 +73,24 @@ public class BusinessSignup2Activity extends AppCompatActivity {
             }
         });
 
-        arrayList_categories = new ArrayList<>();
-        arrayList_categories.add("Restaurants");
-        arrayList_categories.add("Food");
-        arrayList_categories.add("Home Services");
-        arrayList_categories.add("Hotels and Travel");
-        arrayList_categories.add("Local Flavor");
-        arrayList_categories.add("Nightlife");
-        arrayList_categories.add("Event Planning and Services");
-        arrayList_categories.add("Pets");
+        arrayListCategories = new ArrayList<>();
+        arrayListCategories.add("Restaurants");
+        arrayListCategories.add("Food");
+        arrayListCategories.add("Home Services");
+        arrayListCategories.add("Hotels and Travel");
+        arrayListCategories.add("Local Flavor");
+        arrayListCategories.add("Nightlife");
+        arrayListCategories.add("Event Planning and Services");
+        arrayListCategories.add("Pets");
 
-        arrayAdapter_categories = new ArrayAdapter<>(getApplicationContext(), com.google.android.material.R.layout.support_simple_spinner_dropdown_item, arrayList_categories);
-        actCategory.setAdapter(arrayAdapter_categories);
+        arrayAdapterCategories = new ArrayAdapter<>(getApplicationContext(), com.google.android.material.R.layout.support_simple_spinner_dropdown_item, arrayListCategories);
+        actCategory.setAdapter(arrayAdapterCategories);
         actCategory.setThreshold(1);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setBusinessUser();
-                ParseUser.logOut();
                 jumpToLogin();
                 Toast.makeText(BusinessSignup2Activity.this, "Account Created! Please Sign in", Toast.LENGTH_SHORT).show();
             }
@@ -103,20 +103,25 @@ public class BusinessSignup2Activity extends AppCompatActivity {
         businessUser.put(KEY_DESCRIPTION, etDescription.getText().toString());
         businessUser.put(KEY_CATEGORY, tilCategory.getEditText().getText().toString());
         businessUser.put(KEY_SocialFb, etSocialFb.getText().toString());
-        //businessUser.put(KEY_PROFILEPIC, new ParseFile(imageFile));
+        businessUser.put(KEY_PROFILEPIC, new ParseFile(imageFile));
         // Saves the new object.
-        businessUser.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    //Save was done
-                } else {
-                    //Something went wrong
-                    Log.e("Business Signup 2 Activity", e.getMessage());
-                    Toast.makeText(BusinessSignup2Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        try {
+            businessUser.save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        businessUser.saveInBackground(new SaveCallback() {
+//            @Override
+//            public void done(ParseException e) {
+//                if (e == null) {
+//                    //Save was done
+//                } else {
+//                    //Something went wrong
+//                    Log.e("Business Signup 2 Activity", e.getMessage());
+//                    Toast.makeText(BusinessSignup2Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
     }
 
     private void selectImage() {
