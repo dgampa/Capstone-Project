@@ -31,7 +31,6 @@ public class BusinessSignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_signup);
-        getSupportActionBar().hide();
 
         etBusinessName = findViewById(R.id.etBusinessName);
         etUsername = findViewById(R.id.etUsername);

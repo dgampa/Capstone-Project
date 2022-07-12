@@ -26,7 +26,10 @@ import com.metauniversity.behindthebusiness.Models.YelpBusiness;
 import com.metauniversity.behindthebusiness.Models.YelpBusinessHours;
 import com.metauniversity.behindthebusiness.Models.YelpDailyHours;
 import com.metauniversity.behindthebusiness.Models.YelpService;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,7 +44,6 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
     public static final String API_KEY = "oxPk-IUSVW11ywOYiP_f36cDTQZOzezaZ6IZdxrdwRYbcDWeR_jroSB0lfpe5fYKxQrLEk8si0QR_ndSxtc4lb9DlxJiVcqkardZIxdhGS-8Sge9-mT776v24Ai2YnYx";
     Context context;
     List<YelpBusiness> businessList;
-    private String businessName;
 
     public BusinessesAdapter(Context context, List<YelpBusiness> businessList) {
         this.context = context;
@@ -86,9 +88,10 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
         TextView tvLocation;
         TextView tvHoursOfOperationTitle;
         TextView tvHoursOfOperation;
-        TextView tvSocialMediaTitle;
-        TextView tvFacebookAccount;
-        TextView tvInstagramAccount;
+        ImageView ivFacebookIcon;
+        TextView tvFacebookHandle;
+        ImageView ivInstagramIcon;
+        TextView tvInstaHandle;
         TextView tvNextPage;
         ImageButton ibNext;
 
@@ -106,15 +109,17 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
             tvLocation = itemView.findViewById(R.id.tvLocation);
             tvHoursOfOperationTitle = itemView.findViewById(R.id.tvHoursOfOperationTitle);
             tvHoursOfOperation = itemView.findViewById(R.id.tvHoursOfOperation);
-            tvSocialMediaTitle = itemView.findViewById(R.id.tvSocialMediaTitle);
-            tvFacebookAccount = itemView.findViewById(R.id.tvFacebookAccount);
-            tvInstagramAccount = itemView.findViewById(R.id.tvInstagramAccount);
+            ivFacebookIcon = itemView.findViewById(R.id.ivFacebookIcon);
+            tvFacebookHandle = itemView.findViewById(R.id.tvFacebookHandle);
+            ivInstagramIcon = itemView.findViewById(R.id.ivInstagramIcon);
+            tvInstaHandle = itemView.findViewById(R.id.tvInstaHandle);
             tvNextPage = itemView.findViewById(R.id.tvNextPage);
             ibNext = itemView.findViewById(R.id.ibNext);
         }
 
         public void bind(YelpBusiness business) {
-            businessName = business.getName();
+            expandableView.setVisibility(View.GONE);
+            String businessName = business.getName();
             tvBusinessName.setText(businessName);
             Glide.with(context).asBitmap().load(business.getImageUrl()).into(ivProfileImage);
 
@@ -141,7 +146,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
             cvBusinessDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showMore(view);
+                    showMore(view, businessName);
                 }
             });
             float rating = (float) business.getRating();
@@ -152,14 +157,41 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
             setBusinessDetails(businessID);
         }
 
-        private void showMore(View view) {
+
+        private void showMore(View view, String businessName) {
             if (expandableView.getVisibility() == View.GONE) {
                 TransitionManager.beginDelayedTransition(cvBusinessDetails, new AutoTransition());
                 expandableView.setVisibility(View.VISIBLE);
+                List<BusinessUser> businessUsers = new ArrayList<>();
+                ParseQuery<BusinessUser> query = ParseQuery.getQuery(BusinessUser.class);
+                query.whereEqualTo("businessName", businessName);
+                try {
+                    businessUsers = query.find();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (businessUsers.size() == 0) {
+                    ivFacebookIcon.setVisibility(View.GONE);
+                    ivInstagramIcon.setVisibility(View.GONE);
+                    return;
+                }
+                BusinessUser businessUser = businessUsers.get(0);
+                setSocials(businessUser);
             } else {
                 TransitionManager.beginDelayedTransition(cvBusinessDetails, new AutoTransition());
                 expandableView.setVisibility(View.GONE);
             }
+        }
+
+        private void setSocials(BusinessUser businessUser) {
+            if (businessUser.getSocialFB() != null)
+                tvFacebookHandle.setText("@" + businessUser.getSocialFB());
+            else
+                ivFacebookIcon.setVisibility(View.GONE);
+            if (businessUser.getSocialInstagram() != null)
+                tvInstaHandle.setText("@" + businessUser.getSocialInstagram());
+            else
+                ivInstagramIcon.setVisibility(View.GONE);
         }
 
         private void setBusinessDetails(String businessID) {
@@ -180,7 +212,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
                         List<YelpDailyHours> dailyHoursList = businessHours.getDailyHours();
                         tvHoursOfOperation.setText(getFormattedHours(dailyHoursList));
                         // set is the business open
-                        if(businessHours.getOpen())
+                        if (businessHours.getOpen())
                             ivOpenIcon.setVisibility(View.VISIBLE);
                     }
                 }

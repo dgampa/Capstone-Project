@@ -41,7 +41,6 @@
                 android:layout_marginEnd="5dp"
                 android:layout_toEndOf="@id/ivProfileImage"
                 android:gravity="center"
-                android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintBottom_toTopOf="@+id/rbBusinessRating"
                 app:layout_constraintEnd_toStartOf="@+id/ivOpenIcon"
@@ -92,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/condensedView"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -146,39 +145,55 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvHoursOfOperationTitle" />
 
-            <TextView
-                android:id="@+id/tvSocialMediaTitle"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:id="@+id/rlFacebook"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                android:text="Social Media"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/rlInstagram"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvHoursOfOperation" />
+                app:layout_constraintTop_toBottomOf="@id/tvHoursOfOperation">
 
-            <TextView
-                android:id="@+id/tvFacebookAccount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSocialMediaTitle" />
+                <ImageView
+                    android:id="@+id/ivFacebookIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/facebook_icon" />
 
-            <TextView
-                android:id="@+id/tvInstagramAccount"
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tvFacebookHandle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/ivFacebookIcon"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlInstagram"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvFacebookAccount" />
+                app:layout_constraintStart_toEndOf="@id/rlFacebook"
+                app:layout_constraintTop_toBottomOf="@id/tvHoursOfOperation">
+
+                <ImageView
+                    android:id="@+id/ivInstagramIcon"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/instagram_icon" />
+
+                <TextView
+                    android:id="@+id/tvInstaHandle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_below="@id/ivInstagramIcon"
+                    android:layout_centerHorizontal="true" />
+            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
