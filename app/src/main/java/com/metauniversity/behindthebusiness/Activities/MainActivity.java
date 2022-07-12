@@ -24,7 +24,6 @@ import com.parse.ParseUser;
 public class MainActivity extends AppCompatActivity {
 
     final FragmentManager fragmentManager = getSupportFragmentManager();
-    public static final boolean isBusiness = (boolean) ParseUser.getCurrentUser().get("isBusiness");
     private BottomNavigationView bottomNavigation;
 
     @Override
