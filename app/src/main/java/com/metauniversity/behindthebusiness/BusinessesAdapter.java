@@ -323,3 +323,4 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
         context.startActivity(intent);
     }
 }
+

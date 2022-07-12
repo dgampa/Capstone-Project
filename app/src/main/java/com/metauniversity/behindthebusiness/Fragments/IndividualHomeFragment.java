@@ -168,7 +168,7 @@ public class IndividualHomeFragment extends Fragment implements LocationChangeFr
             @Override
             public void onResponse(Call<YelpSearchResult> call, Response<YelpSearchResult> response) {
                 // checking for code 200 to confirm a successful call
-                Log.i(TAG, "onResponse: " + response.code() + "Body: " + response.body());
+                Log.i(TAG, "onResponse: " + response + "total: " + response.body().getTotal());
                 YelpSearchResult body = response.body();
                 businessList.addAll(body.getBusinesses());
                 adapter.notifyDataSetChanged();

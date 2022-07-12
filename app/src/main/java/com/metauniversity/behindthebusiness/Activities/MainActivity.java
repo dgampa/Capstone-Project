@@ -21,17 +21,17 @@ import com.parse.ParseUser;
 public class MainActivity extends AppCompatActivity {
 
     final FragmentManager fragmentManager = getSupportFragmentManager();
-    private BottomNavigationView BottomNavigation;
+    private BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigation = findViewById(R.id.BottomNavigation);
+        bottomNavigation = findViewById(R.id.bottomNavigation);
         boolean isBusiness = (boolean) ParseUser.getCurrentUser().get("isBusiness");
         if (isBusiness) {
-            BottomNavigation.inflateMenu(R.menu.business_bottom_navigation_menu);
-            BottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            bottomNavigation.inflateMenu(R.menu.business_bottom_navigation_menu);
+            bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment fragment;
@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
             });
         } else {
             // set up the navigation tool bar
-            BottomNavigation.inflateMenu(R.menu.individual_bottom_navigation_menu);
-            BottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+            bottomNavigation.inflateMenu(R.menu.individual_bottom_navigation_menu);
+            bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment fragment;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         // set default selection
-        BottomNavigation.setSelectedItemId(R.id.action_home);
+        bottomNavigation.setSelectedItemId(R.id.action_home);
     }
 
 }
