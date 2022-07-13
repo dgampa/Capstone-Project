@@ -19,12 +19,15 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.metauniversity.behindthebusiness.Activities.LoginActivity;
+import com.metauniversity.behindthebusiness.BusinessUser;
 import com.metauniversity.behindthebusiness.Models.YelpService;
 import com.metauniversity.behindthebusiness.Models.YelpSearchResult;
 import com.metauniversity.behindthebusiness.Models.YelpBusiness;
 import com.metauniversity.behindthebusiness.BusinessesAdapter;
 import com.metauniversity.behindthebusiness.EndlessRecyclerViewScrollListener;
 import com.metauniversity.behindthebusiness.R;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -47,6 +50,7 @@ public class BusinessHomeFragment extends Fragment implements LocationChangeFrag
     public static final int LIMIT = 25;
     private int startPosition = 0;
     private String location = "United States";
+    private String category = "Food";
     private EndlessRecyclerViewScrollListener scrollListener;
     private SwipeRefreshLayout swipeBusinesses;
     RecyclerView rvBusinesses;
@@ -121,10 +125,21 @@ public class BusinessHomeFragment extends Fragment implements LocationChangeFrag
     private void loadMoreBusinesses() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         YelpService yelpService = retrofit.create(YelpService.class);
-        ParseUser user =  ParseUser.getCurrentUser();
-        //set the businesses category
-        String category = "Travel";
         startPosition+=25;
+        ParseUser currentUser =  ParseUser.getCurrentUser();
+        List<BusinessUser> businessUsers = new ArrayList<>();
+        ParseQuery<BusinessUser> query = ParseQuery.getQuery(BusinessUser.class);
+        query.whereEqualTo("businessUser", currentUser.getObjectId());
+        try {
+            businessUsers = query.find();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(businessUsers.size()>0) {
+            BusinessUser businessUser = businessUsers.get(0);
+            category = businessUser.getCategory();
+            location = businessUser.getLocation();
+        }
         Call<YelpSearchResult> call = yelpService.searchBusinesses("Bearer " + API_KEY, category, location, LIMIT, startPosition);
         call.enqueue(new Callback<YelpSearchResult>() {
             @Override
@@ -149,14 +164,20 @@ public class BusinessHomeFragment extends Fragment implements LocationChangeFrag
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         YelpService yelpService = retrofit.create(YelpService.class);
         String categories = "";
-        boolean isBusiness = (boolean) ParseUser.getCurrentUser().get("isBusiness");
-        ArrayList<String> favoriteCategories = (ArrayList<String>) ParseUser.getCurrentUser().get("favoriteCategories");
-        if (!isBusiness) {
-            int i = 0;
-            for (; i < favoriteCategories.size() - 1; i++)
-                categories += favoriteCategories.get(i) + ", ";
-            categories += favoriteCategories.get(i);
-            Log.i("HomeFragment", "categories searched: " + categories);
+        //set the businesses category
+        ParseUser currentUser =  ParseUser.getCurrentUser();
+        List<BusinessUser> businessUsers = new ArrayList<>();
+        ParseQuery<BusinessUser> query = ParseQuery.getQuery(BusinessUser.class);
+        query.whereEqualTo("businessUser", currentUser.getObjectId());
+        try {
+            businessUsers = query.find();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(businessUsers.size()>0) {
+            BusinessUser businessUser = businessUsers.get(0);
+            category = businessUser.getCategory();
+            location = businessUser.getLocation();
         }
         Call<YelpSearchResult> call = yelpService.searchBusinesses("Bearer " + API_KEY, categories, location, LIMIT, 0);
         call.enqueue(new Callback<YelpSearchResult>() {
