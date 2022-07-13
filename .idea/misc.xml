@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/ic_menu_24dp.xml" value="0.1065" />
         <entry key="app/src/main/res/drawable/rectangle_1.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/sign_up_ind.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_business_media.xml" value="0.16666666666666666" />
         <entry key="app/src/main/res/layout/activity_business_signup.xml" value="0.271539306640625" />
         <entry key="app/src/main/res/layout/activity_business_signup2.xml" value="0.2870819091796875" />
         <entry key="app/src/main/res/layout/activity_customer_review.xml" value="0.21928863525390632" />
@@ -29,6 +30,7 @@
         <entry key="app/src/main/res/layout/fragment_map_search.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.11322188449848024" />
         <entry key="app/src/main/res/layout/fragment_user_type.xml" value="0.22514648437499996" />
+        <entry key="app/src/main/res/layout/fragment_video_display.xml" value="0.16077898550724637" />
         <entry key="app/src/main/res/layout/item_business.xml" value="0.3118896484375" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.1" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.35" />
