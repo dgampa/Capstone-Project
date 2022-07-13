@@ -44,7 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements LocationChangeFragment.OnInputSelected{
+public class IndividualHomeFragment extends Fragment implements LocationChangeFragment.OnInputSelected{
 
     private static final String TAG = "Home Fragment";
     public static final String BASE_URL = "https://api.yelp.com/v3/";
@@ -58,17 +58,6 @@ public class HomeFragment extends Fragment implements LocationChangeFragment.OnI
     List<YelpBusiness> businessList;
     BusinessesAdapter adapter;
     private Toolbar topAppBar;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -174,7 +163,7 @@ public class HomeFragment extends Fragment implements LocationChangeFragment.OnI
             @Override
             public void onResponse(Call<YelpSearchResult> call, Response<YelpSearchResult> response) {
                 // checking for code 200 to confirm a successful call
-                Log.i(TAG, "onResponse: " + response.code() + "Body: " + response.body());
+                Log.i(TAG, "onResponse: " + response + "total: " + response.body().getTotal());
                 YelpSearchResult body = response.body();
                 businessList.addAll(body.getBusinesses());
                 adapter.notifyDataSetChanged();
@@ -188,7 +177,7 @@ public class HomeFragment extends Fragment implements LocationChangeFragment.OnI
     }
     private void showLocationChangeDialog() {
         LocationChangeFragment dialog = new LocationChangeFragment();
-        dialog.setTargetFragment(HomeFragment.this, 1);
+        dialog.setTargetFragment(IndividualHomeFragment.this, 1);
         dialog.show(getFragmentManager(), "onLocationChangeFragment");
     }
 
