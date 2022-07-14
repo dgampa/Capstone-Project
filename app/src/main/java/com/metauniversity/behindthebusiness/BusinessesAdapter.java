@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.metauniversity.behindthebusiness.Activities.CustomerReviewActivity;
+import com.metauniversity.behindthebusiness.Activities.BusinessMediaActivity;
 import com.metauniversity.behindthebusiness.Models.YelpBusinessDetails;
 import com.metauniversity.behindthebusiness.Models.YelpBusiness;
 import com.metauniversity.behindthebusiness.Models.YelpBusinessHours;
@@ -28,6 +29,7 @@ import com.metauniversity.behindthebusiness.Models.YelpDailyHours;
 import com.metauniversity.behindthebusiness.Models.YelpService;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +97,9 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
         TextView tvNextPage;
         ImageButton ibNext;
 
-        public ViewHolder(@NonNull View itemView) {
+        String businessURL;
+
+        public ViewHolder(@NonNull View itemView)  {
             super(itemView);
             cvBusinessDetails = itemView.findViewById(R.id.cvBusinessDetails);
             condensedView = itemView.findViewById(R.id.condensedView);
@@ -121,6 +125,8 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
             expandableView.setVisibility(View.GONE);
             String businessName = business.getName();
             tvBusinessName.setText(businessName);
+            // set business URL
+            businessURL = business.getBusinessURL();
             Glide.with(context).asBitmap().load(business.getImageUrl()).into(ivProfileImage);
 
             if (!business.getImageUrl().equals("none")) {
@@ -149,14 +155,29 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
                     showMore(view, businessName);
                 }
             });
+            ibNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, BusinessMediaActivity.class);
+                    intent.putExtra("businessName", tvBusinessName.getText().toString());
+                    intent.putExtra("businessURL", businessURL);
+                    context.startActivity(intent);
+                }
+            });
             float rating = (float) business.getRating();
             rbBusinessRating.setRating(rating);
             rbBusinessRating.setIsIndicator(true);
             tvLocation.setText(business.getLocation().formattedLocation());
             String businessID = business.getId();
             setBusinessDetails(businessID);
-        }
 
+        }
+        private void goToReviewActivity() {
+            Intent intent = new Intent(context, CustomerReviewActivity.class);
+            intent.putExtra("businessName", tvBusinessName.getText().toString());
+            intent.putExtra("URL", businessURL);
+            context.startActivity(intent);
+        }
 
         private void showMore(View view, String businessName) {
             if (expandableView.getVisibility() == View.GONE) {
@@ -318,9 +339,5 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
         return timing;
     }
 
-    private void goToReviewActivity() {
-        Intent intent = new Intent(context, CustomerReviewActivity.class);
-        context.startActivity(intent);
-    }
 }
 

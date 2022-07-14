@@ -20,6 +20,8 @@ public class YelpBusiness {
     @SerializedName("location")
     private YelpLocation location;
     private String id;
+    @SerializedName("url")
+    private String businessURL;
 
     public String getName() {
         return name;
@@ -68,4 +70,7 @@ public class YelpBusiness {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getBusinessURL() { return businessURL; }
+    public void setBusinessURL(String businessURL) { this.businessURL = businessURL; }
 }

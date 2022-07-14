@@ -58,11 +58,9 @@ public class UserPost extends ParseObject {
         put(KEY_LIKES_BY_USERS, userLiked);
     }
 
-    public ParseUser getBusiness() {
-        return getParseUser(KEY_BUSINESS);
+    public String getBusiness() {
+        return getString(KEY_BUSINESS);
     }
 
-    public void setBusiness(ParseUser business) {
-        put(KEY_BUSINESS, business);
-    }
+    public void setBusiness(String business) { put(KEY_BUSINESS, business); }
 }

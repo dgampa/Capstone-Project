@@ -54,6 +54,9 @@ public class CustomerReviewActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.ratingBar);
         btnSubmitRating = findViewById(R.id.btnSubmitRating);
         // set Business Name here
+        Intent intent = getIntent();
+        String businessName = intent.getStringExtra("businessName");
+        tvBusinessName.setText(businessName);
         // tvBusiness.setText(businessName);
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +75,8 @@ public class CustomerReviewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 saveRating();
+                finish();
+                Toast.makeText(CustomerReviewActivity.this, "Review Submitted", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -129,6 +134,7 @@ public class CustomerReviewActivity extends AppCompatActivity {
     private void savePost(ParseUser currentUser, File photoFile, Number rating) throws ParseException {
         UserPost post = new UserPost();
         post.setUser(currentUser);
+        post.setBusiness(tvBusinessName.getText().toString());
         post.setImage(new ParseFile(photoFile));
         post.setRating(rating);
         post.saveInBackground(new SaveCallback() {
