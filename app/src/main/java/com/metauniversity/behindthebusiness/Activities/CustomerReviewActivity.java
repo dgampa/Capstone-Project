@@ -8,7 +8,6 @@ import com.metauniversity.behindthebusiness.R;
 import com.metauniversity.behindthebusiness.UserPost;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -50,7 +49,7 @@ public class CustomerReviewActivity extends AppCompatActivity {
         tvBusinessName = findViewById(R.id.tvBusinessName);
         ibExit = findViewById(R.id.ibExit);
         btnCapture = findViewById(R.id.btnCapture);
-        ivPost = findViewById(R.id.ivPost);
+        ivPost = findViewById(R.id.ivBackView);
         ratingBar = findViewById(R.id.ratingBar);
         btnSubmitRating = findViewById(R.id.btnSubmitRating);
         // set Business Name here

@@ -20,17 +20,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPlayVideo" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnPlayVideo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:text="Play"
             app:layout_constraintEnd_toEndOf="@id/vvBusinessCompilationVideo"
             app:layout_constraintStart_toStartOf="@id/vvBusinessCompilationVideo"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/vvBusinessCompilationVideo" />
 
         <TextView
             android:id="@+id/tvDescriptionTitle"
@@ -43,7 +42,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vvBusinessCompilationVideo" />
+            app:layout_constraintTop_toBottomOf="@+id/btnPlayVideo" />
 
         <TextView
             android:id="@+id/tvDescription"

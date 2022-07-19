@@ -9,7 +9,6 @@ import com.parse.ParseUser;
 import org.parceler.Parcel;
 
 @ParseClassName("BusinessVideo")
-@Parcel(analyze = BusinessVideo.class)
 public class BusinessVideo extends ParseObject {
     // private instance variables
     private static final String KEY_USER = "user";

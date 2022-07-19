@@ -6,6 +6,7 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/btn_submit.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/circle_profile.xml" value="0.1405" />
+        <entry key="app/src/main/res/drawable/favorite.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1405" />
         <entry key="app/src/main/res/drawable/ic_menu_24dp.xml" value="0.1065" />
@@ -26,7 +27,7 @@
         <entry key="app/src/main/res/layout/fragment_customer_review.xml" value="0.1716485507246377" />
         <entry key="app/src/main/res/layout/fragment_daily_videos.xml" value="0.11322188449848024" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.11322188449848024" />
-        <entry key="app/src/main/res/layout/fragment_individual_profile.xml" value="0.11322188449848024" />
+        <entry key="app/src/main/res/layout/fragment_individual_profile.xml" value="0.3913482666015625" />
         <entry key="app/src/main/res/layout/fragment_location_change.xml" value="0.13272543059777103" />
         <entry key="app/src/main/res/layout/fragment_map_search.xml" value="0.2453125" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.11322188449848024" />
