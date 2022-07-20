@@ -1,11 +1,13 @@
 package com.metauniversity.behindthebusiness.Fragments;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.metauniversity.behindthebusiness.Activities.BusinessMediaActivity;
 import com.metauniversity.behindthebusiness.Activities.LoginActivity;
 import com.metauniversity.behindthebusiness.BusinessUser;
 import com.metauniversity.behindthebusiness.Models.YelpService;
@@ -72,6 +75,13 @@ public class BusinessHomeFragment extends Fragment implements LocationChangeFrag
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                }, 1
+        );
         topAppBar = view.findViewById(R.id.topAppBar);
         //set up the top app bar
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
