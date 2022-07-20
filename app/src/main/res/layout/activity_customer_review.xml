@@ -19,7 +19,7 @@
             android:text="Business"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="@+id/ibExit"
-            app:layout_constraintEnd_toStartOf="@+id/ibExit"
+            app:layout_constraintEnd_toStartOf="@id/ibExit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,9 +45,9 @@
             app:layout_constraintTop_toBottomOf="@+id/tvBusinessName" />
 
         <ImageView
-            android:id="@+id/ivPost"
-            android:layout_width="266dp"
-            android:layout_height="228dp"
+            android:id="@+id/ivBackView"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
             android:layout_marginTop="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
@@ -55,25 +55,36 @@
             app:layout_constraintTop_toBottomOf="@+id/btnCapture"
             tools:src="@tools:sample/avatars" />
 
+        <ImageView
+            android:id="@+id/ivFrontView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBackView"
+            app:layout_constraintStart_toStartOf="@+id/ivBackView"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <TextView
             android:id="@+id/tvRatingTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="Rate Us!"
+            android:layout_marginTop="25dp"
+            android:text="Rate Your Visit"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivPost" />
+            app:layout_constraintTop_toBottomOf="@+id/ivBackView" />
 
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="5dp"
             android:numStars="5"
             android:stepSize="1"
+            app:layout_constraintBottom_toTopOf="@+id/btnSubmitRating"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRatingTitle" />
 
@@ -81,10 +92,11 @@
             android:id="@+id/btnSubmitRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="10dp"
             android:text="Submit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

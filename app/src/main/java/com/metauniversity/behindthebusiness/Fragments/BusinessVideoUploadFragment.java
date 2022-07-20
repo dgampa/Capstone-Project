@@ -113,14 +113,19 @@ public class BusinessVideoUploadFragment extends Fragment {
             videoView.setVideoURI(data.getData());
             videoView.start();
             builder.setView(videoView).show();
-            ParseObject businessVideo = new ParseObject("BusinessVideo");
-            businessVideo.put("user", ParseUser.getCurrentUser());
+            BusinessVideo businessVideo = new BusinessVideo();
+            businessVideo.setUser(ParseUser.getCurrentUser());
             if (data.getData() != null) {
                 Log.i("info", "" + data.getData());
-                byte[] bytes = convertVideoToBytes(data.getData());
+                byte[] bytes = convertVideoToBytes(Uri.parse(data.getData().getPath()));
                 //now lets try and add this uri file to the parse server in a parsefile.
-                ParseFile parseVideoFile = new ParseFile ("vid", convertVideoToBytes(Uri.parse(data.getDataString())));
-                businessVideo.put("video", parseVideoFile);
+                ParseFile parseVideoFile = new ParseFile("vid", bytes);
+                try {
+                    parseVideoFile.save();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                businessVideo.setVideo(parseVideoFile);
                 try {
                     businessVideo.save();
                 } catch (ParseException e) {

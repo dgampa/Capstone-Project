@@ -83,6 +83,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
         ImageView ivProfileImage;
         TextView tvBusinessName;
         ImageView ivOpenIcon;
+        ImageButton btnFavorite;
         ImageButton btnAddPic;
         RatingBar rbBusinessRating;
         ConstraintLayout expandableView;
@@ -106,6 +107,7 @@ public class BusinessesAdapter extends RecyclerView.Adapter<BusinessesAdapter.Vi
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             tvBusinessName = itemView.findViewById(R.id.tvBusinessName);
             ivOpenIcon = itemView.findViewById(R.id.ivOpenIcon);
+            btnFavorite = itemView.findViewById(R.id.btnFavorite);
             btnAddPic = itemView.findViewById(R.id.btnAddPic);
             rbBusinessRating = itemView.findViewById(R.id.rbBusinessRating);
             expandableView = itemView.findViewById(R.id.expandableView);

@@ -55,4 +55,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     // for expandable card view
     implementation 'androidx.cardview:cardview:1.0.0'
+    // for mp4parser
+//    implementation 'org.mp4parser:isoparser:1.9.41'
+//    implementation 'org.mp4parser:muxer:1.9.41'
+    implementation "com.googlecode.mp4parser:isoparser:1.1.22"
 }
