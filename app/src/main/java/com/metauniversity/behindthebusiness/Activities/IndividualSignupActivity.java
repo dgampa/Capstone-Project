@@ -38,7 +38,6 @@ public class IndividualSignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_signup);
-        getSupportActionBar().hide();
 
         etFullName = findViewById(R.id.etFullName);
         etUsername = findViewById(R.id.etUsername);
