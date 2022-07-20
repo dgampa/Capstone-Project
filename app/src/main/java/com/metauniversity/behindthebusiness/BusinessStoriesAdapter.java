@@ -44,7 +44,7 @@ public class BusinessStoriesAdapter extends RecyclerView.Adapter<BusinessStories
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         UserPost currentPost = businessStories.get(position);
         holder.bind(currentPost);
-        Toast.makeText(context, currentPost.getBusiness(), Toast.LENGTH_LONG).show();
+        Toast.makeText(context, currentPost.getBusiness(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

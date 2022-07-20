@@ -31,7 +31,7 @@ public class BusinessVideo extends ParseObject {
         put(KEY_VIDEO_FILE, videoFile);
     }
 
-    public String setVideoType() {
+    public String getVideoType() {
         return getString(KEY_VIDEO_TYPE);
     }
 

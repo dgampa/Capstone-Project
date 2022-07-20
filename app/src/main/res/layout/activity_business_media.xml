@@ -12,15 +12,27 @@
 
         <VideoView
             android:id="@+id/vvBusinessCompilationVideo"
-            android:layout_width="0dp"
-            android:layout_height="333dp"
+            android:layout_width="278dp"
+            android:layout_height="331dp"
+            android:layout_gravity="center"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/vvBusinessCompilationVideo"
+            app:layout_constraintEnd_toEndOf="@+id/vvBusinessCompilationVideo"
+            app:layout_constraintStart_toStartOf="@+id/vvBusinessCompilationVideo"
+            app:layout_constraintTop_toTopOf="@+id/vvBusinessCompilationVideo" />
 
         <Button
             android:id="@+id/btnPlayVideo"

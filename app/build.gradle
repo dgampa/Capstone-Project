@@ -22,8 +22,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_9
+        targetCompatibility JavaVersion.VERSION_1_9
     }
 }
 
@@ -56,7 +56,7 @@ dependencies {
     // for expandable card view
     implementation 'androidx.cardview:cardview:1.0.0'
     // for mp4parser
-//    implementation 'org.mp4parser:isoparser:1.9.41'
-//    implementation 'org.mp4parser:muxer:1.9.41'
-    implementation "com.googlecode.mp4parser:isoparser:1.1.22"
+    implementation 'org.mp4parser:isoparser:1.9.39'
+    implementation 'org.mp4parser:muxer:1.9.39'
+//    implementation "com.googlecode.mp4parser:isoparser:1.1.22"
 }

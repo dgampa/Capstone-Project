@@ -2,19 +2,14 @@ package com.metauniversity.behindthebusiness.Activities;
 
 import static android.os.FileUtils.copy;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.coremedia.iso.boxes.Container;
-import com.googlecode.mp4parser.FileDataSourceImpl;
-import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.Track;
-import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
-import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.metauniversity.behindthebusiness.BusinessUser;
 import com.metauniversity.behindthebusiness.BusinessStoriesAdapter;
+import com.metauniversity.behindthebusiness.Mp4ParserWrapper;
 import com.metauniversity.behindthebusiness.rvBusinessStoriesClickListener;
 import com.metauniversity.behindthebusiness.UserPost;
 import com.metauniversity.behindthebusiness.BusinessVideo;
@@ -25,33 +20,25 @@ import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.PersistableBundle;
 import android.util.Log;
-import android.util.LruCache;
 import android.view.View;
 import android.widget.Button;
-import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-import javax.sql.DataSource;
-
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
 
 public class BusinessMediaActivity extends AppCompatActivity {
 
@@ -61,18 +48,14 @@ public class BusinessMediaActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private TextView tvYelpWebsite;
     private VideoView vvCompilationVideo;
+    private ProgressBar progressBar;
     private Button btnPlayVideo;
-    private MediaController mediaController;
     BusinessStoriesAdapter adapter;
     ArrayList<UserPost> businessStories;
     String businessName;
     BusinessUser currentBusiness;
     List<BusinessVideo> businessVideos;
-    List<String> businessVideoURLs = new ArrayList<>();
-    int incrementer = 0;
-    String video;
-    Uri uri;
-    String path;
+    List<ParseFile> businessVideoFiles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +67,8 @@ public class BusinessMediaActivity extends AppCompatActivity {
         tvYelpWebsite = (TextView) findViewById(R.id.tvYelpWebsite);
         layoutManager = new LinearLayoutManager(this);
         vvCompilationVideo = (VideoView) findViewById(R.id.vvBusinessCompilationVideo);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnPlayVideo = (Button) findViewById(R.id.btnPlayVideo);
-//        mediaController = new MediaController(this);
         rvBusinessStories.setHasFixedSize(true);
         rvBusinessStories.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         Intent intent = getIntent();
@@ -107,13 +90,14 @@ public class BusinessMediaActivity extends AppCompatActivity {
             tvDescriptionTitle.setVisibility(View.GONE);
             tvDescription.setVisibility(View.GONE);
         }
+        tvYelpWebsite.setText(businessURL);
         if (currentBusiness != null) {
             findVideo();
+            playVideo();
         } else {
             btnPlayVideo.setVisibility(View.GONE);
             vvCompilationVideo.setVisibility(View.GONE);
         }
-        tvYelpWebsite.setText(businessURL);
         btnPlayVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,6 +120,7 @@ public class BusinessMediaActivity extends AppCompatActivity {
         getBusinessStories();
     }
 
+
     private void findVideo() {
         businessVideos = new ArrayList<>();
         ParseQuery<BusinessVideo> query = ParseQuery.getQuery(BusinessVideo.class);
@@ -147,103 +132,62 @@ public class BusinessMediaActivity extends AppCompatActivity {
         }
         if (businessVideos.size() > 0) {
             for (BusinessVideo businessVideo : businessVideos) {
-                businessVideoURLs.add(businessVideo.getVideo().getUrl());
+                businessVideoFiles.add(businessVideo.getVideo());
             }
         }
     }
 
     private void playVideo() {
-        MovieCreator movieCreator = new MovieCreator();
-        int count = businessVideoURLs.size();
-        Movie[] movies = new Movie[count];
-//        DownloadManager manager;
-//        for (int i = 0; i < count; i++) {
-//            video = businessVideoURLs.get(i);
-//            uri = Uri.parse(video);
-//            path = uri.getPath().substring(0, uri.getPath().lastIndexOf("/"));
-//            File videoFile = null;
-//            FileInputStream fileInputStream = null;
-//            FileChannel fileChannel = null;
-//            try {
-//                videoFile = File.createTempFile("tmpFile", null, getCacheDir());
-//
-//                movies[i] = MovieCreator.build("tmpFile");
-//                videoFile.delete();
-//            } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+        if(businessVideos == null){
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+        if(businessVideos.size()<=0){
+            progressBar.setVisibility(View.GONE);
+            vvCompilationVideo.setVisibility(View.GONE);
+            Toast.makeText(this, "No Video Available For This Business", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(businessVideos.size()<=1){
+            vvCompilationVideo.setVideoURI(Uri.parse(businessVideoFiles.get(0).getUrl()));
+            progressBar.setVisibility(View.GONE);
+            vvCompilationVideo.start();
+            return;
+        }
+        Mp4ParserWrapper mp4ParserWrapper = new Mp4ParserWrapper();
+        String finalPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + 0 + "video.mp4";
+        byte[] fileBytes1 = new byte[0];
+        File videoFile1 = new File(finalPath);
         try {
-            String filePath0 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + "VID_20220719_151724.mp4";
-            File file0 = new File(filePath0);
-            Log.i("Business", "file exists: " + String.valueOf(file0.exists()) + " file length: " + file0.length());
-            movies[0] = MovieCreator.build(filePath0);
-            String filePath1 = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + "VID_20220719_151550.mp4";
-            movies[1] = MovieCreator.build(filePath1);
-        } catch (IOException e) {
+            fileBytes1 = businessVideoFiles.get(0).getData();
+            FileOutputStream outputStream1 = new FileOutputStream(videoFile1);
+            outputStream1.write(fileBytes1);
+        } catch (ParseException e) {
             e.printStackTrace();
-        }
-        List<Track> videoTracks = new LinkedList<Track>();
-        for (Movie m : movies) {
-            for (Track t : m.getTracks()) {
-                if (t.getHandler().equals("vide")) {
-                    videoTracks.add(t);
-                }
-            }
-        }
-        Movie result = new Movie();
-        if (videoTracks.size() > 0) {
-            try {
-                result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Container mp4file = new DefaultMp4Builder().build(result);
-        FileChannel fc = null;
-        try {
-            fc = new FileOutputStream(new File("output.mp4")).getChannel();
-            mp4file.writeContainer(fc);
-            fc.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        vvCompilationVideo.setVideoPath("output.mp4");
+        for (int i = 1; i < businessVideoFiles.size(); i++) {
+            String additionalPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + i + "video.mp4";
+            try {
+                byte[] fileBytes2 = businessVideoFiles.get(i).getData();
+                File videoFile2 = new File(additionalPath);
+                FileOutputStream outputStream2 = new FileOutputStream(videoFile2);
+                outputStream2.write(fileBytes2);
+                mp4ParserWrapper.append(videoFile1.getAbsolutePath(), videoFile2.getAbsolutePath());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        vvCompilationVideo.setVideoPath(finalPath);
+        progressBar.setVisibility(View.GONE);
         vvCompilationVideo.start();
-
-//        if (businessVideoURLs.size() > 0) {
-//            video = businessVideoURLs.get(incrementer);
-//            uri = Uri.parse(video);
-//            MovieCreator movieCreator = new MovieCreator();
-//            Movie movie = new Movie();
-//            try {
-//                FileDataSourceImpl file = new FileDataSourceImpl(String.valueOf(uri));
-//                H264TrackImpl h264Track = new H264TrackImpl(file);
-//                AACTrackImpl aacTrack = new AACTrackImpl(new FileDataSourceImpl(video));
-//                movie.addTrack(h264Track);
-//                movie.addTrack(aacTrack);
-//                movie = movieCreator.build(video);
-//                Container mp4file = new DefaultMp4Builder().build(movie);
-//                FileChannel fc = new FileOutputStream(new File("output.mp4")).getChannel();
-//                mp4file.writeContainer(fc);
-//                fc.close();
-//                vvCompilationVideo.setVideoURI(Uri.parse(String.valueOf(mp4file)));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            vvCompilationVideo.setVideoURI(uri);
-//            vvCompilationVideo.setMediaController(mediaController);
-//            mediaController.setAnchorView(vvCompilationVideo);
-//            vvCompilationVideo.setOnCompletionListener(this);
-//            vvCompilationVideo.start();
-//        } else {
-//            vvCompilationVideo.setVisibility(View.GONE);
-//            btnPlayVideo.setVisibility(View.GONE);
-//        }
     }
 
 //    private File fileFromContentUri(Context context, Uri contentUri) {
