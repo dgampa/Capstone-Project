@@ -2,12 +2,14 @@ package com.metauniversity.behindthebusiness.Activities;
 
 import static android.os.FileUtils.copy;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.metauniversity.behindthebusiness.BusinessUser;
 import com.metauniversity.behindthebusiness.BusinessStoriesAdapter;
+import com.metauniversity.behindthebusiness.Mp4ParserWrapper;
 import com.metauniversity.behindthebusiness.rvBusinessStoriesClickListener;
 import com.metauniversity.behindthebusiness.UserPost;
 import com.metauniversity.behindthebusiness.BusinessVideo;
@@ -19,13 +21,16 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.MediaController;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.io.File;
@@ -43,8 +48,8 @@ public class BusinessMediaActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private TextView tvYelpWebsite;
     private VideoView vvCompilationVideo;
+    private ProgressBar progressBar;
     private Button btnPlayVideo;
-    private MediaController mediaController;
     BusinessStoriesAdapter adapter;
     ArrayList<UserPost> businessStories;
     String businessName;
@@ -62,6 +67,7 @@ public class BusinessMediaActivity extends AppCompatActivity {
         tvYelpWebsite = (TextView) findViewById(R.id.tvYelpWebsite);
         layoutManager = new LinearLayoutManager(this);
         vvCompilationVideo = (VideoView) findViewById(R.id.vvBusinessCompilationVideo);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
         btnPlayVideo = (Button) findViewById(R.id.btnPlayVideo);
         rvBusinessStories.setHasFixedSize(true);
         rvBusinessStories.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -84,13 +90,14 @@ public class BusinessMediaActivity extends AppCompatActivity {
             tvDescriptionTitle.setVisibility(View.GONE);
             tvDescription.setVisibility(View.GONE);
         }
+        tvYelpWebsite.setText(businessURL);
         if (currentBusiness != null) {
             findVideo();
+            playVideo();
         } else {
             btnPlayVideo.setVisibility(View.GONE);
             vvCompilationVideo.setVisibility(View.GONE);
         }
-        tvYelpWebsite.setText(businessURL);
         btnPlayVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +120,7 @@ public class BusinessMediaActivity extends AppCompatActivity {
         getBusinessStories();
     }
 
+
     private void findVideo() {
         businessVideos = new ArrayList<>();
         ParseQuery<BusinessVideo> query = ParseQuery.getQuery(BusinessVideo.class);
@@ -130,6 +138,22 @@ public class BusinessMediaActivity extends AppCompatActivity {
     }
 
     private void playVideo() {
+        if(businessVideos == null){
+            progressBar.setVisibility(View.GONE);
+            return;
+        }
+        if(businessVideos.size()<=0){
+            progressBar.setVisibility(View.GONE);
+            vvCompilationVideo.setVisibility(View.GONE);
+            Toast.makeText(this, "No Video Available For This Business", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(businessVideos.size()<=1){
+            vvCompilationVideo.setVideoURI(Uri.parse(businessVideoFiles.get(0).getUrl()));
+            progressBar.setVisibility(View.GONE);
+            vvCompilationVideo.start();
+            return;
+        }
         Mp4ParserWrapper mp4ParserWrapper = new Mp4ParserWrapper();
         String finalPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + 0 + "video.mp4";
         byte[] fileBytes1 = new byte[0];
@@ -162,6 +186,7 @@ public class BusinessMediaActivity extends AppCompatActivity {
             }
         }
         vvCompilationVideo.setVideoPath(finalPath);
+        progressBar.setVisibility(View.GONE);
         vvCompilationVideo.start();
     }
 

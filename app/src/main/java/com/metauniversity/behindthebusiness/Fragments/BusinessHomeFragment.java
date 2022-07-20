@@ -75,13 +75,6 @@ public class BusinessHomeFragment extends Fragment implements LocationChangeFrag
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ActivityCompat.requestPermissions(getActivity(),
-                new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
-                }, 1
-        );
         topAppBar = view.findViewById(R.id.topAppBar);
         //set up the top app bar
         topAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
