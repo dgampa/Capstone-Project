@@ -208,6 +208,51 @@ public class BusinessMediaActivity extends AppCompatActivity {
         deleteFile("videoFile");
     }
 
+//    private File fileFromContentUri(Context context, Uri contentUri) {
+//        String fileExtension = getFileExtension(context, contentUri);
+//        String fileName = "temp_file";
+//        if(fileExtension!=null){
+//            fileName+=".$fileExtension";
+//        }
+//        File tempFile = new File(context.getCacheDir(), fileName);
+//        try{
+//            FileOutputStream outputStream = new FileOutputStream(tempFile);
+//            InputStream inputStream = context.getContentResolver().openInputStream(contentUri);
+//            copy(inputStream, outputStream);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return tempFile;
+//    }
+//
+//    private String getFileExtension(Context context, Uri contentUri) {
+//        String fileType = context.getContentResolver().getType(uri);
+//        return MimeTypeMap.getSingleton().getExtensionFromMimeType(fileType);
+//    }
+
+//    @Override
+//    public void onCompletion(MediaPlayer mediaPlayer) {
+//        if (incrementer < businessVideoURLs.size() - 1) {
+//            incrementer++;
+//        } else {
+//            incrementer = 0;
+//            return;
+//        }
+//        video = businessVideoURLs.get(incrementer);
+//        uri = Uri.parse(video);
+//        mediaPlayer.stop();
+//        mediaPlayer.reset();
+//        try {
+//            mediaPlayer.setDataSource(video);
+//            mediaPlayer.prepare();
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//        mediaPlayer.start();
+//    }
+
     private void getBusinessStories() {
         ParseQuery<UserPost> query = ParseQuery.getQuery(UserPost.class);
         query.whereEqualTo("businessFor", businessName);
