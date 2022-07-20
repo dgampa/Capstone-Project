@@ -10,12 +10,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <VideoView
+            android:id="@+id/vvDailyVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="327dp"
+            android:foregroundGravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCaptureVideo" />
+
+        <Button
+            android:id="@+id/btnSubmitVideo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/submit_title"
+            app:layout_constraintTop_toBottomOf="@+id/vvDailyVideo" />
+
         <Button
             android:id="@+id/btnCaptureVideo"
             android:layout_width="249dp"
             android:layout_height="50dp"
+            android:layout_marginTop="50dp"
             android:text="Capture Video"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
