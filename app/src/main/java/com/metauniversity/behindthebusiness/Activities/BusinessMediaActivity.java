@@ -3,17 +3,9 @@ package com.metauniversity.behindthebusiness.Activities;
 import static android.os.FileUtils.copy;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.coremedia.iso.boxes.Container;
-import com.googlecode.mp4parser.FileDataSourceImpl;
-import com.googlecode.mp4parser.authoring.Movie;
-import com.googlecode.mp4parser.authoring.Track;
-import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
-import com.googlecode.mp4parser.authoring.container.mp4.MovieCreator;
-import com.googlecode.mp4parser.authoring.tracks.AppendTrack;
 import com.metauniversity.behindthebusiness.BusinessUser;
 import com.metauniversity.behindthebusiness.BusinessStoriesAdapter;
 import com.metauniversity.behindthebusiness.rvBusinessStoriesClickListener;
@@ -26,40 +18,22 @@ import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import android.Manifest;
-import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.util.LruCache;
 import android.view.View;
 import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-import javax.sql.DataSource;
-
-import okhttp3.Cache;
-import okhttp3.OkHttpClient;
 
 public class BusinessMediaActivity extends AppCompatActivity {
 
@@ -156,18 +130,29 @@ public class BusinessMediaActivity extends AppCompatActivity {
     }
 
     private void playVideo() {
-        MovieCreator movieCreator = new MovieCreator();
-        int count = businessVideoFiles.size();
-        Movie[] movies = new Movie[count];
-        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + "video.mp4";
-        for (int i = 0; i < count; i++) {
-            byte[] fileBytes = new byte[0];
-            File videoFile = new File(path);
+        Mp4ParserWrapper mp4ParserWrapper = new Mp4ParserWrapper();
+        String finalPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + 0 + "video.mp4";
+        byte[] fileBytes1 = new byte[0];
+        File videoFile1 = new File(finalPath);
+        try {
+            fileBytes1 = businessVideoFiles.get(0).getData();
+            FileOutputStream outputStream1 = new FileOutputStream(videoFile1);
+            outputStream1.write(fileBytes1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (int i = 1; i < businessVideoFiles.size(); i++) {
+            String additionalPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + i + "video.mp4";
             try {
-                fileBytes = businessVideoFiles.get(i).getData();
-                FileOutputStream outputStream = new FileOutputStream(videoFile);
-                outputStream.write(fileBytes);
-                movies[i] = MovieCreator.build(path);
+                byte[] fileBytes2 = businessVideoFiles.get(i).getData();
+                File videoFile2 = new File(additionalPath);
+                FileOutputStream outputStream2 = new FileOutputStream(videoFile2);
+                outputStream2.write(fileBytes2);
+                mp4ParserWrapper.append(videoFile1.getAbsolutePath(), videoFile2.getAbsolutePath());
             } catch (ParseException e) {
                 e.printStackTrace();
             } catch (FileNotFoundException e) {
@@ -176,36 +161,8 @@ public class BusinessMediaActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        List<Track> videoTracks = new LinkedList<Track>();
-        for (Movie m : movies) {
-            for (Track t : m.getTracks()) {
-                if (t.getHandler().equals("vide")) {
-                    videoTracks.add(t);
-                }
-            }
-        }
-        Movie result = new Movie();
-        if (videoTracks.size() > 0) {
-            try {
-                result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Container mp4file = new DefaultMp4Builder().build(result);
-        FileChannel fc = null;
-        try {
-            fc = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + "output.mp4")).getChannel();
-            mp4file.writeContainer(fc);
-            fc.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        vvCompilationVideo.setVideoPath(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + File.separator + "output.mp4");
+        vvCompilationVideo.setVideoPath(finalPath);
         vvCompilationVideo.start();
-        deleteFile("videoFile");
     }
 
     private void getBusinessStories() {
