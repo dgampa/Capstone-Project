@@ -1,5 +1,7 @@
 package com.metauniversity.behindthebusiness.Fragments;
 
+import static com.metauniversity.behindthebusiness.Fragments.IndividualHomeFragment.*;
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.metauniversity.behindthebusiness.Fragments.IndividualHomeFragment;
 import com.metauniversity.behindthebusiness.R;
 
 /**
@@ -50,6 +53,7 @@ public class LocationChangeFragment extends DialogFragment {
         etLocation = view.findViewById(R.id.etLocation);
         btnSubmitLocation = view.findViewById(R.id.btnSubmitLocation);
 
+        etLocation.setText(etLocation.getText());
         // onClick for individual user sign up
         btnSubmitLocation.setOnClickListener(new View.OnClickListener() {
             @Override
