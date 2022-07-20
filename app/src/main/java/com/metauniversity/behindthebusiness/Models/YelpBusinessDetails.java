@@ -10,8 +10,8 @@ public class YelpBusinessDetails {
     public List<YelpBusinessHours> getHours() {
         return hours;
     }
-
     public void setHours(List<YelpBusinessHours> hours) {
         this.hours = hours;
     }
+
 }

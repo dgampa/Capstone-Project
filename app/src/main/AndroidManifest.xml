@@ -38,9 +38,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".BusinessMediaActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activities.CustomerReviewActivity"
             android:exported="false" />
         <activity
@@ -66,6 +63,12 @@
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.BusinessMediaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.FullPageActivity"
             android:exported="false" />
 
         <meta-data
