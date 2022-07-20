@@ -27,7 +27,6 @@ import com.metauniversity.behindthebusiness.BusinessesAdapter;
 import com.metauniversity.behindthebusiness.EndlessRecyclerViewScrollListener;
 import com.metauniversity.behindthebusiness.R;
 import com.parse.ParseUser;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -35,6 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +46,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class IndividualHomeFragment extends Fragment implements LocationChangeFragment.OnInputSelected{
+public class IndividualHomeFragment extends Fragment implements LocationChangeFragment.OnInputSelected {
 
     private static final String TAG = "Home Fragment";
     public static final String BASE_URL = "https://api.yelp.com/v3/";
@@ -58,6 +60,17 @@ public class IndividualHomeFragment extends Fragment implements LocationChangeFr
     List<YelpBusiness> businessList;
     BusinessesAdapter adapter;
     private Toolbar topAppBar;
+
+    public IndividualHomeFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_individual_home, container, false);
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

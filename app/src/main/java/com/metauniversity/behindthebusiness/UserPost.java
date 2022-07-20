@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.parceler.Parcel;
 
 @ParseClassName("UserPost")
-@Parcel(analyze = UserPost.class)
 public class UserPost extends ParseObject {
     // private instance variables for different fields of post
     public static final String KEY_IMAGE = "image";

@@ -8,7 +8,9 @@ import com.metauniversity.behindthebusiness.R;
 import com.metauniversity.behindthebusiness.UserPost;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -45,7 +47,6 @@ public class CustomerReviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_review);
-        getSupportActionBar().hide();
         tvBusinessName = findViewById(R.id.tvBusinessName);
         ibExit = findViewById(R.id.ibExit);
         btnCapture = findViewById(R.id.btnCapture);
@@ -127,18 +128,17 @@ public class CustomerReviewActivity extends AppCompatActivity {
 
     private void savePost(ParseUser currentUser, File photoFile, Number rating) throws ParseException {
         UserPost post = new UserPost();
-        post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
+        post.setImage(new ParseFile(photoFile));
         post.setRating(rating);
-        post.save();
-//        post.saveInBackground(new SaveCallback() {
-//            @Override
-//            public void done(ParseException e) {
-//                if (e!=null){
-//                    Log.e("CustomerReviewActivity", "Error while saving", e);
-//                }
-//                Log.i("CustomerReviewActivity", "Post save was successful!");
-//            }
-//        });
+        post.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e!=null){
+                    Log.e("CustomerReviewActivity", "Error while saving", e);
+                }
+                Log.i("CustomerReviewActivity", "Post save was successful!");
+            }
+        });
     }
 }
