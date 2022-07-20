@@ -50,6 +50,10 @@ public class BusinessVideoUploadFragment extends Fragment {
     private Button btnSubmitVideo;
     Uri videoUri;
 
+    private VideoView vvDailyVideo;
+    private Button btnSubmitVideo;
+    Uri videoUri;
+
     public BusinessVideoUploadFragment() {
         // Required empty public constructor
     }
@@ -64,6 +68,15 @@ public class BusinessVideoUploadFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ActivityCompat.requestPermissions(getActivity(),
+                new String[]{
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                }, 1
+        );
+        btnVideoCapture = view.findViewById(R.id.btnCaptureVideo);
+        vvDailyVideo = view.findViewById(R.id.vvDailyVideo);
+        btnSubmitVideo = view.findViewById(R.id.btnSubmitVideo);
         btnVideoCapture = view.findViewById(R.id.btnCaptureVideo);
         vvDailyVideo = view.findViewById(R.id.vvDailyVideo);
         btnSubmitVideo = view.findViewById(R.id.btnSubmitVideo);
